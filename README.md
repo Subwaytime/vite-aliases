@@ -1,14 +1,12 @@
-<h2 align='center'><samp>vite-aliases</samp></h2>
+<h2 align='left'>vite-aliases</h2>
 
-<p align='center'>Alias auto generation for vite</p>
+<p align='left'>Alias auto generation for Vite</p>
 
-<p align='center'>
+<p align='left'>
 <a href='https://www.npmjs.com/package/vite-aliases'>
 <img src='https://img.shields.io/npm/v/vite-aliases?color=222&style=flat-square'>
 </a>
 </p>
-
-<br>
 
 ## Usage
 
