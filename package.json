@@ -1,0 +1,33 @@
+{
+    "name": "vite-aliases",
+    "description": "Alias auto generation for Vite",
+    "version": "0.1.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "private": false,
+    "license": "MIT",
+    "author": "Subwaytime <leon.l@nophase.de>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/subwaytime/vite-aliases"
+    },
+    "homepage": "https://github.com/subwaytime/vite-aliases#readme",
+    "bugs": "https://github.com/subwaytime/vite-aliases/issues",
+    "keywords": [
+        "vite",
+        "vue",
+        "alias",
+        "aliases",
+        "auto",
+        "generation"
+    ],
+    "scripts": {
+        "dev": "npm run build -- --watch",
+        "build": "tsup src/index.ts --dts --format cjs,esm"
+    },
+    "devDependencies": {
+        "tsup": "^3.7.0",
+        "typescript": "^4.0.5"
+    }
+}
