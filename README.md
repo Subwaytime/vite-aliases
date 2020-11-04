@@ -50,11 +50,11 @@ will generate the following:
 
 ```
 {
-    '/@assets/': '${your_project_path}/assets',
+    '/@assets/': '${your_project_path}/src/assets',
     '/@components/': '${your_project_path}/components'
-    '/@pages/': '${your_project_path}/pages'
-    '/@store/': '${your_project_path}/store'
-    '/@utils/': '${your_project_path}/utils'
+    '/@pages/': '${your_project_path}/src/pages'
+    '/@store/': '${your_project_path}/src/store'
+    '/@utils/': '${your_project_path}/src/utils'
 }
 ```
 
