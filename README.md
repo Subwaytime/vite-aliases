@@ -50,13 +50,13 @@ This Structure:
 
 will generate the following:
 
-```json
+```
 {
-    '/@assets/': '${project_path}/assets',
-    '/@components/': '${project_path}/components'
-    '/@pages/': '${project_path}/pages'
-    '/@store/': '${project_path}/store'
-    '/@utils/': '${project_path}/utils'
+    '/@assets/': '${your_project_path}/assets',
+    '/@components/': '${your_project_path}/components'
+    '/@pages/': '${your_project_path}/pages'
+    '/@store/': '${your_project_path}/store'
+    '/@utils/': '${your_project_path}/utils'
 }
 ```
 
@@ -71,10 +71,9 @@ Later on there will be more Features that i have planned, but this is it for now
 
 ## Thanks
 
-Thanks to [@brattonross](https://github.com/brattonross)
-[vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie).
-
-and [@antfu](https://github.com/antfu), because this tiny Library is inspired by both
+Thanks to [@brattonross](https://github.com/brattonross) and [@antfu](https://github.com/antfu), 
+due to this tiny Library beeing inspired by both Projects:
+[vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
 [vite-plugin-components](https://github.com/antfu/vite-plugin-components).
 
 ## License
