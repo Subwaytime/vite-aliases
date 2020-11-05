@@ -38,12 +38,12 @@ Furthermore it will use your native OS Filesystem, so it should work on UNIX and
 This Structure:
 
 ```
-    src
-        assets
-        components
-        pages
-        store
-        utils
+src
+    assets
+    components
+    pages
+    store
+    utils
 ```
 
 will generate the following:
@@ -63,13 +63,13 @@ will generate the following:
 Current Configuration allows two Parameters, the Projectpath and the Aliasprefix!
 
 ```ts
-    getAliases({
-        // Path to the project Directory
-        path: './src/',
+getAliases({
+    // Path to the project Directory
+    path: './src/',
 
-        // Prefix Symbol for the Aliases
-        prefix: '@'
-    })
+    // Prefix Symbol for the Aliases
+    prefix: '@'
+})
 ```
 
 ## Thanks
