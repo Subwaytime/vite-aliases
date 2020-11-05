@@ -22,7 +22,7 @@ Add it to `vite.config.js`
 // vite.config.js
 import { getAliases } from 'vite-aliases'
 
-const aliases = getAliases('./src/'); // your project folder
+const aliases = getAliases(); // your project folder
 
 export default {
     alias: aliases
@@ -60,11 +60,16 @@ will generate the following:
 
 ## Configuration
 
-Only one Path is currently allowed to be passed into the Function.
-Later on there will be more Features that i have planned, but this is it for now!
+Current Configuration allows two Parameters, the Projectpath and the Aliasprefix!
 
 ```ts
-    getAliases(string)
+    getAliases({
+        // Path to the project Directory
+        path: './src/',
+
+        // Prefix Symbol for the Aliases
+        prefix: '@'
+    })
 ```
 
 ## Thanks
