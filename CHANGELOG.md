@@ -1,3 +1,7 @@
+### Features [0.1.3]
+
+* add global alias configuration ([12c7a9b](https://github.com/Subwaytime/vite-aliases/commit/74daa908333db723763a087b5ea2727916dd6df0))
+
 ### Bugfixes [0.1.2]
 
 * fix root pathing ([4326667](https://github.com/Subwaytime/vite-aliases/commit/d11c5bbef4f495083d769aa9ae6c65974c49a082))
