@@ -22,7 +22,7 @@ Add it to `vite.config.js`
 // vite.config.js
 import { getAliases } from 'vite-aliases'
 
-const aliases = getAliases(); // your project folder
+const aliases = getAliases();
 
 export default {
     alias: aliases
@@ -76,7 +76,9 @@ Current Configuration allows two Parameters, the Projectpath and the Aliasprefix
 
 Thanks to [@brattonross](https://github.com/brattonross) and [@antfu](https://github.com/antfu), 
 due to this tiny Library beeing inspired by both Projects:
+
 [vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
+
 [vite-plugin-components](https://github.com/antfu/vite-plugin-components).
 
 ## License
