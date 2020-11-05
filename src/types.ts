@@ -13,4 +13,10 @@ export interface Options {
      * @default '@'
      */
     prefix: string
+
+    /**
+     * Root path of Vite project.
+     * @default 'process.cwd()'
+     */
+    root: string
 }
