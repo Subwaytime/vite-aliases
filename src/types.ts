@@ -3,7 +3,7 @@
  */
 export interface Options {
     /**
-     * Path to the project Directory.
+     * Path to the project Directory
      * @default './src/'
      */
     path: string
@@ -14,8 +14,14 @@ export interface Options {
      */
     prefix: string
 
+
     /**
-     * Root path of Vite project.
+     * Allow global project Directory alias
+     */
+    allowGlobalAlias: boolean
+
+    /**
+     * Root path of Vite project
      * @default 'process.cwd()'
      */
     root: string
