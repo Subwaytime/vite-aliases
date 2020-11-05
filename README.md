@@ -60,7 +60,7 @@ will generate the following:
 
 ## Configuration
 
-Current Configuration allows two Parameters, the Projectpath and the Aliasprefix!
+Current available Options:
 
 ```ts
 getAliases({
@@ -69,6 +69,9 @@ getAliases({
 
     // Prefix Symbol for the Aliases
     prefix: '@'
+
+    // Allow global project Directory alias
+    allowGlobalAlias: true
 })
 ```
 

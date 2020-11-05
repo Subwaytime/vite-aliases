@@ -17,6 +17,7 @@ export interface Options {
 
     /**
      * Allow global project Directory alias
+     * @default true
      */
     allowGlobalAlias: boolean
 
