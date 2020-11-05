@@ -1,10 +1,10 @@
-<h2 align='left'>vite-aliases</h2>
+<h2 align="left">vite-aliases</h2>
 
-<p align='left'>Alias auto generation for Vite</p>
+<p align="left">Alias auto generation for Vite</p>
 
-<p align='left'>
-<a href='https://www.npmjs.com/package/vite-aliases'>
-<img src='https://img.shields.io/npm/v/vite-aliases?color=222&style=flat-square'>
+<p align="left">
+<a href="https://www.npmjs.com/package/vite-aliases">
+<img src="https://img.shields.io/npm/v/vite-aliases?color=222&style=flat-square">
 </a>
 </p>
 
@@ -68,7 +68,7 @@ getAliases({
     path: './src/',
 
     // Prefix Symbol for the Aliases
-    prefix: '@'
+    prefix: '@',
 
     // Allow global project Directory alias
     allowGlobalAlias: true
