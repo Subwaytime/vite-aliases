@@ -32,7 +32,7 @@ export default {
 That's it!
 
 It will automatically generate the vite aliases based on your Folderstructure.
-At the moment, only the first level will be used for this. 
+At the moment, only the first level will be used for this.
 Furthermore it will use your native OS Filesystem, so it should work on UNIX and Windows.
 
 This Structure:
@@ -50,11 +50,11 @@ will generate the following:
 
 ```
 {
-    '/@assets/': '${your_project_path}/src/assets',
-    '/@components/': '${your_project_path}/src/components'
-    '/@pages/': '${your_project_path}/src/pages'
-    '/@store/': '${your_project_path}/src/store'
-    '/@utils/': '${your_project_path}/src/utils'
+    '@assets': '${your_project_path}/src/assets',
+    '@components': '${your_project_path}/src/components'
+    '@pages': '${your_project_path}/src/pages'
+    '@store': '${your_project_path}/src/store'
+    '@utils': '${your_project_path}/src/utils'
 }
 ```
 
@@ -77,7 +77,7 @@ getAliases({
 
 ## Thanks
 
-Thanks to [@brattonross](https://github.com/brattonross) and [@antfu](https://github.com/antfu), 
+Thanks to [@brattonross](https://github.com/brattonross) and [@antfu](https://github.com/antfu),
 due to this tiny Library beeing inspired by both Projects:
 
 [vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
