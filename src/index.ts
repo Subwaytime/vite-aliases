@@ -12,7 +12,7 @@ const defaultOptions: Options = {
 
 /**
  * Reads the Projectpath and returns Vite Aliases
- * @param options 
+ * @param options
  * @returns Record<string, string>
  */
 
@@ -25,15 +25,15 @@ export function getAliases(options: Partial<Options> = {}) {
         console.warn('No Directories could be found!');
     }
 
-    // turn directory array into alias object 
+    // turn directory array into alias object
     const aliases = dirs.reduce((alias: Record<string, string>, dir: string) => {
-        alias[`/${prefix}${dir}/`] = resolve(root, `${path}/${dir}`);
+        alias[`${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
         return alias;
     }, {});
 
     // add global alias for the whole project folder
     if (allowGlobalAlias) {
-        aliases[`/${prefix}/`] = resolve(root, `${path}`);
+        aliases[`${prefix}`] = resolve(root, `${path}`);
     }
 
     return aliases;
