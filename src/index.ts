@@ -1,13 +1,15 @@
-import { readdirSync } from 'fs';
+import { readdirSync, writeFile } from 'fs';
 import { resolve } from 'path';
 
 import { Options } from './types';
 
 const defaultOptions: Options = {
     path: './src/',
+    log_path: './src/logs',
     prefix: '@',
     addLeadingSlash: false,
     allowGlobalAlias: true,
+    allowLogging: false,
     root: process.cwd()
 };
 
@@ -18,7 +20,15 @@ const defaultOptions: Options = {
  */
 
 export function getAliases(options: Partial<Options> = {}) {
-    const { path, prefix, addLeadingSlash, allowGlobalAlias, root }: Options = Object.assign({}, defaultOptions, options);
+    const {
+        path,
+        log_path,
+        prefix,
+        addLeadingSlash,
+        allowGlobalAlias,
+        allowLogging,
+        root
+    }: Options = Object.assign({}, defaultOptions, options);
 
     const dirs = readdirSync(path, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 
@@ -39,6 +49,11 @@ export function getAliases(options: Partial<Options> = {}) {
     // add global alias for the whole project folder
     if (allowGlobalAlias) {
         aliases[`${prefix}`] = resolve(root, `${path}`);
+    }
+
+    // log all aliases into one file
+    if(allowLogging) {
+        writeFile(log_path, JSON.stringify(aliases), () => {});
     }
 
     return aliases;
