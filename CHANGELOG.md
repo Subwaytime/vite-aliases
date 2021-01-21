@@ -1,3 +1,7 @@
+### Features [0.2.1]
+* add leading slash to prefix ([a94e717](https://github.com/Subwaytime/vite-aliases/commit/a94e717ecbadaf84ee0eb37f3bf225282b1c3e12))
+* allow alias logging ([af481ba](https://github.com/Subwaytime/vite-aliases/commit/af481ba488c0f25c42878a4123ba106eea7184b6))
+
 ### Features [0.1.3]
 
 * add global alias configuration ([12c7a9b](https://github.com/Subwaytime/vite-aliases/commit/74daa908333db723763a087b5ea2727916dd6df0))
