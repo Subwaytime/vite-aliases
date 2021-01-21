@@ -30,25 +30,25 @@ export function getAliases(options: Partial<Options> = {}) {
         root
     }: Options = Object.assign({}, defaultOptions, options);
 
+    // get all folders from the project directory
     const dirs = readdirSync(path, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 
     if (!dirs.length) {
         console.warn('No Directories could be found!');
     }
 
+    // add leading Slash to prefix if needed
+    const aliasPrefix = (addLeadingSlash ? `/${prefix}` : prefix);
+
     // turn directory array into alias object
     const aliases = dirs.reduce((alias: Record<string, string>, dir: string) => {
-        if(addLeadingSlash) {
-            alias[`${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
-        } else {
-            alias[`/${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
-        }
+        alias[`${aliasPrefix}${dir}`] = resolve(root, `${path}/${dir}`);
         return alias;
     }, {});
 
     // add global alias for the whole project folder
     if (allowGlobalAlias) {
-        aliases[`${prefix}`] = resolve(root, `${path}`);
+        aliases[`${aliasPrefix}`] = resolve(root, `${path}`);
     }
 
     // log all aliases into one file
