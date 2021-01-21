@@ -14,6 +14,13 @@ export interface Options {
      */
     prefix: string
 
+    /**
+     * Add a Leading Slash
+     * This makes it look more similiar to Vite 1
+     * @default false
+     */
+
+    addLeadingSlash: boolean
 
     /**
      * Allow global project Directory alias
