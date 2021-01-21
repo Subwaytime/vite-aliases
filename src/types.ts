@@ -9,6 +9,13 @@ export interface Options {
     path: string
 
     /**
+     * Path to log the generated Aliases
+     * @default './src/logs/''
+     */
+
+    log_path: string
+
+    /**
      * Prefix Symbol for the Aliases
      * @default '@'
      */
@@ -21,6 +28,13 @@ export interface Options {
      */
 
     addLeadingSlash: boolean
+
+    /**
+     * Allow creating a Logger File
+     * @default false
+     */
+
+    allowLogging: boolean
 
     /**
      * Allow global project Directory alias
