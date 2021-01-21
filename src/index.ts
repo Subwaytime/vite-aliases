@@ -6,6 +6,7 @@ import { Options } from './types';
 const defaultOptions: Options = {
     path: './src/',
     prefix: '@',
+    addLeadingSlash: false,
     allowGlobalAlias: true,
     root: process.cwd()
 };
@@ -17,7 +18,7 @@ const defaultOptions: Options = {
  */
 
 export function getAliases(options: Partial<Options> = {}) {
-    const { path, prefix, allowGlobalAlias, root }: Options = Object.assign({}, defaultOptions, options);
+    const { path, prefix, addLeadingSlash, allowGlobalAlias, root }: Options = Object.assign({}, defaultOptions, options);
 
     const dirs = readdirSync(path, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 
@@ -27,7 +28,11 @@ export function getAliases(options: Partial<Options> = {}) {
 
     // turn directory array into alias object
     const aliases = dirs.reduce((alias: Record<string, string>, dir: string) => {
-        alias[`${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
+        if(addLeadingSlash) {
+            alias[`${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
+        } else {
+            alias[`/${prefix}${dir}`] = resolve(root, `${path}/${dir}`);
+        }
         return alias;
     }, {});
 
