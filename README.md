@@ -1,6 +1,6 @@
 <h2 align="left">vite-aliases</h2>
 
-<p align="left">Alias auto generation for Vite</p>
+<p align="left">Alias auto generation for Vite 2</p>
 
 <p align="left">
 <a href="https://www.npmjs.com/package/vite-aliases">
@@ -64,14 +64,36 @@ Current available Options:
 
 ```ts
 getAliases({
-    // Path to the project Directory
-    path: './src/',
+	// Relative path to the project Directory
+	path: 'src',
 
-    // Prefix Symbol for the Aliases
-    prefix: '@',
+    // Relative path to log the generated Aliases
+	log_path: 'src/logs',
 
-    // Allow global project Directory alias
-    allowGlobalAlias: true
+	// Prefix Symbol for the Aliases
+	prefix: '@',
+
+	// Allow Searching for Subdirectories
+	deep: true,
+
+	// Search Depthlevel for Subdirectories
+	depth: 1,
+
+	// Add a Leading Slash
+	// This makes it look more similiar to Vite 1
+	addLeadingSlash: false,
+
+	// Allow creating a Logger File
+	allowLogging: false,
+
+	// Allow global project Directory alias
+	allowGlobalAlias: true,
+
+	// Ignore Error on Duplicate Folders
+	ignoreDuplicates: false,
+
+	// Root path of Vite project
+	root: process.cwd()
 })
 ```
 
