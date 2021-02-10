@@ -80,7 +80,7 @@ export function getAliases(options: Partial<Options> = {}) {
 
 	// log all aliases into one file
 	if (allowLogging) {
-		writeFile(log_path, JSON.stringify(aliases), () => {});
+		writeFile(`${log_path}/vite-aliases.json`, JSON.stringify(aliases), () => {});
 		console.log('[vite-aliases]: Logfile created!');
 	}
 
