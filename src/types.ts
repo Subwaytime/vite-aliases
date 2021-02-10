@@ -64,3 +64,8 @@ export interface Options {
 	 */
 	root: string;
 }
+
+export interface Alias {
+	find: string
+	replacement: string
+};
