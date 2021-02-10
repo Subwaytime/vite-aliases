@@ -14,6 +14,9 @@
     },
     "homepage": "https://github.com/subwaytime/vite-aliases#readme",
     "bugs": "https://github.com/subwaytime/vite-aliases/issues",
+    "files": [
+        "dist"
+    ],
     "keywords": [
         "vite",
         "vue",
@@ -25,7 +28,8 @@
     "scripts": {
         "update:packages": "npm update --save-dev && npm update --save",
         "dev": "npm run build -- --watch",
-        "build": "tsup src/index.ts --dts --format cjs,esm"
+        "build": "tsup src/index.ts --dts --format cjs,esm",
+        "prepublishOnly": "npm run build"
     },
     "devDependencies": {
         "@types/node": "^14.14.6",
