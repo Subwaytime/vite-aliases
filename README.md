@@ -67,7 +67,7 @@ getAliases({
 	// Relative path to the project Directory
 	path: 'src',
 
-    // Relative path to log the generated Aliases
+	// Relative path to log the generated Aliases
 	log_path: 'src/logs',
 
 	// Prefix Symbol for the Aliases
