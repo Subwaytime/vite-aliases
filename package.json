@@ -23,13 +23,14 @@
         "generation"
     ],
     "scripts": {
+        "update:packages": "npm update --save-dev && npm update --save",
         "dev": "npm run build -- --watch",
         "build": "tsup src/index.ts --dts --format cjs,esm"
     },
     "devDependencies": {
-        "fast-glob": "^3.2.5",
         "@types/node": "^14.14.6",
+        "fast-glob": "^3.2.5",
         "tsup": "^3.7.0",
         "typescript": "^4.0.5"
-    },
+    }
 }
