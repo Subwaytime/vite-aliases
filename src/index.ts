@@ -1,8 +1,7 @@
-import { writeFile } from 'fs';
 import fg from 'fast-glob';
 
-import { setPath, split } from './utils';
-import type { Options } from './types';
+import { setPath, split, writeLog } from './utils';
+import type { Alias, Options } from './types';
 
 export const defaultOptions: Options = {
 	path: 'src',
@@ -52,7 +51,7 @@ export function getAliases(options: Partial<Options> = {}) {
 	const guide: string = addLeadingSlash ? `/${prefix}` : prefix;
 
 	// turn directory array into alias object
-	const aliases = directories.map((path) => {
+	const aliases: Alias[] = directories.map((path) => {
 		// turn path into array and get last folder
 		const dir = split(path, '/').slice(-1)[0];
 
@@ -80,8 +79,7 @@ export function getAliases(options: Partial<Options> = {}) {
 
 	// log all aliases into one file
 	if (allowLogging) {
-		writeFile(`${log_path}/vite-aliases.json`, JSON.stringify(aliases), () => {});
-		console.log('[vite-aliases]: Logfile created!');
+		writeLog(log_path, aliases);
 	}
 
 	return uniqueAliases;
