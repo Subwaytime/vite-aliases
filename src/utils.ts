@@ -1,5 +1,5 @@
+import chalk from 'chalk';
 import { writeFile, mkdir } from 'fs';
-import { resolve } from "path";
 
 import type { Alias } from './types';
 
@@ -12,14 +12,16 @@ import type { Alias } from './types';
 export function split(string: string, seperator: string) {
 	return string.split(seperator);
 }
-
 /**
- * Returns a resolved Path based on current Directory
- * @param path
+ *
+ * @param string
+ * @param color
  */
 
-export function setPath(path: string) {
-	return resolve(__dirname, `${path}`);
+export function log(string: string, color: string = 'red') {
+	return console.log(chalk.keyword(color)(`
+		[vite-aliases]: ${string}
+	`));
 }
 
 /**
@@ -29,18 +31,18 @@ export function setPath(path: string) {
  * @param data
  */
 
-export function writeLog(path: string, data: Alias[]) {
+export function createLogfile(path: string, data: Alias[]) {
 	mkdir(`${path}`, { recursive: true }, (error) => {
 		writeFile(`${path}/vite-aliases.json`, JSON.stringify(data), (error) => {
 			if(error) {
-				throw new Error('[vite-aliases]: An Error occured while creating the Logfile.');
+				log('An Error occured while creating the Logfile.');
 			}
 		});
 
 		if(error) {
-			throw new Error('[vite-aliases]: An Error occured while creating the Logfolder.')
+			log('[vite-aliases]: An Error occured while creating the Logfolder.')
 		}
 	});
 
-	console.log('[vite-aliases]: Logfile created!');
+	log('Logfile created!', 'green');
 }
