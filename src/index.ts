@@ -1,20 +1,9 @@
-import fg from 'fast-glob';
+import slash from 'slash';
 
-import { setPath, split, writeLog } from './utils';
+import { config } from './constants';
+import { getDirectories } from './fs/glob';
+import { createLogfile, log, split } from './utils';
 import type { Alias, Options } from './types';
-
-export const defaultOptions: Options = {
-	path: 'src',
-	log_path: 'src/logs',
-	prefix: '@',
-	deep: true,
-	depth: 1,
-	addLeadingSlash: false,
-	allowGlobalAlias: true,
-	allowLogging: false,
-	ignoreDuplicates: false,
-	root: process.cwd(),
-};
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -28,27 +17,19 @@ export function getAliases(options: Partial<Options> = {}) {
 		log_path,
 		prefix,
 		addLeadingSlash,
-		deep,
-		depth,
 		allowGlobalAlias,
 		allowLogging,
 		ignoreDuplicates,
 		root,
-	}: Options = Object.assign({}, defaultOptions, options);
+	}: Options = Object.assign({}, config, options);
 
-	// get all folders from the project directory
-	const directories = fg.sync(deep ? `${path}/**/*` : `${path}/*`, {
-		ignore: ['node_modules'],
-		onlyDirectories: true,
-		cwd: root,
-		deep: depth
-	});
+	log(root);
 
-	if (!directories.length) {
-		throw new Error('[vite-aliases]: No Directories could be found!');
-	}
 	// add leading Slash to prefix if needed
 	const guide: string = addLeadingSlash ? `/${prefix}` : prefix;
+
+	// get all folders
+	const directories = getDirectories(options);
 
 	// turn directory array into alias object
 	const aliases: Alias[] = directories.map((path) => {
@@ -57,7 +38,7 @@ export function getAliases(options: Partial<Options> = {}) {
 
 		return {
 			find: `${guide}${dir}`,
-			replacement: setPath(path)
+			replacement: slash(`${root}/${path}`)
 		};
 	});
 
@@ -66,20 +47,20 @@ export function getAliases(options: Partial<Options> = {}) {
 
 	// output an error message to indicate that some folders share the same name
 	if(ignoreDuplicates && uniqueAliases.length != aliases.length) {
-		throw new Error('[vite-aliases]: There are duplicates to be found in your Folderstructure! Enable Logging to see them.')
+		log('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'yellow')
 	}
 
 	// add global alias for the whole project folder
 	if (allowGlobalAlias) {
 		aliases.push({
 			find: `${guide}`,
-			replacement: setPath(path)
+			replacement: slash(`${root}/${path}`)
 		});
 	}
 
 	// log all aliases into one file
 	if (allowLogging) {
-		writeLog(log_path, aliases);
+		createLogfile(log_path, aliases);
 	}
 
 	return uniqueAliases;
