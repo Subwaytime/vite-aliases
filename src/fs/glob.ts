@@ -1,7 +1,6 @@
 import type { Options } from '../types';
 import fg from 'fast-glob';
 import { log } from '../utils';
-import slash from 'slash';
 
 /**
  * Return all folders from the project directory
