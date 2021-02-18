@@ -25,7 +25,7 @@ import { getAliases } from 'vite-aliases'
 const aliases = getAliases();
 
 export default {
-    resolve: {
+	resolve: {
 		alias: aliases
 	}
 };
