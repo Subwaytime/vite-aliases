@@ -1,9 +1,9 @@
-import slash from 'slash';
+import type { Alias, Options } from './types';
+import { createLogfile, log, split } from './utils';
 
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
-import { createLogfile, log, split } from './utils';
-import type { Alias, Options } from './types';
+import slash from 'slash';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -16,6 +16,8 @@ export function getAliases(options: Partial<Options> = {}) {
 		path,
 		log_path,
 		prefix,
+		deep,
+		depth,
 		addLeadingSlash,
 		allowGlobalAlias,
 		allowLogging,
@@ -23,13 +25,11 @@ export function getAliases(options: Partial<Options> = {}) {
 		root,
 	}: Options = Object.assign({}, config, options);
 
-	log(root);
-
 	// add leading Slash to prefix if needed
 	const guide: string = addLeadingSlash ? `/${prefix}` : prefix;
 
 	// get all folders
-	const directories = getDirectories(options);
+	const directories = getDirectories({ path, deep , root, depth });
 
 	// turn directory array into alias object
 	const aliases: Alias[] = directories.map((path) => {
