@@ -34,8 +34,8 @@ export default {
 That's it!
 
 It will automatically generate the vite aliases based on your Folderstructure.
-At the moment, only the first level will be used for this.
-Furthermore it will use your native OS Filesystem, so it should work on UNIX and Windows.
+If you configure it, i can go to any Folderdepth you want. Its recommended to stay on the first Level. 
+Furthermore it will use your native OS Filesystem, so it works on Linux, Mac, Windows and other OS.
 
 This Structure:
 
