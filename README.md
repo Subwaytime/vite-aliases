@@ -52,6 +52,7 @@ will generate the following:
 
 ```
 {
+    '@': '${your_project_path}/src',
     '@assets': '${your_project_path}/src/assets',
     '@components': '${your_project_path}/src/components'
     '@pages': '${your_project_path}/src/pages'
