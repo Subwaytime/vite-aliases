@@ -33,8 +33,8 @@ export default {
 
 That's it!
 
-It will automatically generate the vite aliases based on your Folderstructure.
-If you configure it, i can go to any Folderdepth you want. Its recommended to stay on the first Level. 
+Based on your Folderstructure, it will now automatically generate all needed aliases.
+You can configure it to any desired Folderdepth, but it is recommend to stay on the first Level!
 Furthermore it will use your native OS Filesystem, so it works on Linux, Mac, Windows and other OS.
 
 This Structure:
@@ -52,12 +52,30 @@ will generate the following:
 
 ```
 {
-    '@': '${your_project_path}/src',
-    '@assets': '${your_project_path}/src/assets',
-    '@components': '${your_project_path}/src/components'
-    '@pages': '${your_project_path}/src/pages'
-    '@store': '${your_project_path}/src/store'
-    '@utils': '${your_project_path}/src/utils'
+    {
+		find: '@',
+		replacement: '${your_project_path}/src'
+	},
+    {
+		find: '@assets',
+		replacement: '${your_project_path}/src/assets'
+	},
+    {
+		find: '@components',
+		replacement: '${your_project_path}/src/components'
+	},
+    {
+		find: '@pages',
+		replacement: '${your_project_path}/src/pages'
+	},
+    {
+		find: '@store',
+		replacement: '${your_project_path}/src/store'
+	},
+    {
+		find: '@utils',
+		replacement: '${your_project_path}/src/utils'
+	},
 }
 ```
 
