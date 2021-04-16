@@ -1,7 +1,7 @@
 <template>
 	<p> Home loaded from
 		<br />
-		<code> @pages/navigation.vue </code>
+		<code> @pages/home.vue </code>
 	</p>
 </template>
 
