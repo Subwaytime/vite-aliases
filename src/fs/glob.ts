@@ -14,7 +14,8 @@ export function getDirectories(options: Partial<Options>) {
 		ignore: ['node_modules'],
 		onlyDirectories: true,
 		cwd: root,
-		deep: depth
+		deep: depth,
+		absolute: true
 	});
 
 	if (!directories.length) {

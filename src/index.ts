@@ -38,7 +38,7 @@ export function getAliases(options: Partial<Options> = {}) {
 
 		return {
 			find: `${guide}${dir}`,
-			replacement: slash(`${root}/${path}`)
+			replacement: slash(`${path}`)
 		};
 	});
 
@@ -54,7 +54,7 @@ export function getAliases(options: Partial<Options> = {}) {
 	if (allowGlobalAlias) {
 		aliases.push({
 			find: `${guide}`,
-			replacement: slash(`${root}/${path}`)
+			replacement: slash(`${path}`)
 		});
 	}
 
