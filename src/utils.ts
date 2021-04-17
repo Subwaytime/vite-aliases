@@ -4,6 +4,16 @@ import { writeFile, mkdir } from 'fs';
 import type { Alias } from './types';
 
 /**
+ * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
+ * @param string
+ * @returns
+ */
+
+export function slash(string: string) {
+  return string.replace(/\\/g, '/')
+}
+
+/**
  * Split String on Seperator into Array
  * @param string
  * @param seperator

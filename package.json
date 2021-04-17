@@ -41,7 +41,6 @@
     "dependencies": {
         "chalk": "^4.1.0",
         "chokidar": "^3.5.1",
-        "slash": "^4.0.0",
         "vite": "^2.1.5"
     }
 }

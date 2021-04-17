@@ -1,9 +1,8 @@
 import type { Alias, Options } from './types';
-import { createLogfile, log, split } from './utils';
+import { createLogfile, log, slash, split } from './utils';
 
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
-import slash from 'slash';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
