@@ -50,33 +50,33 @@ src
 
 will generate the following:
 
-```
-{
-    {
+```js
+[
+	{
 		find: '@',
 		replacement: '${your_project_path}/src'
 	},
-    {
+	{
 		find: '@assets',
 		replacement: '${your_project_path}/src/assets'
 	},
-    {
+	{
 		find: '@components',
 		replacement: '${your_project_path}/src/components'
 	},
-    {
+	{
 		find: '@pages',
 		replacement: '${your_project_path}/src/pages'
 	},
-    {
+	{
 		find: '@store',
 		replacement: '${your_project_path}/src/store'
 	},
-    {
+	{
 		find: '@utils',
 		replacement: '${your_project_path}/src/utils'
 	},
-}
+]
 ```
 
 ## Configuration
@@ -115,7 +115,7 @@ getAliases({
 
 	// Root path of Vite project
 	root: process.cwd()
-})
+});
 ```
 
 ## Thanks
