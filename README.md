@@ -100,10 +100,6 @@ getAliases({
 	// Search Depthlevel for Subdirectories
 	depth: 1,
 
-	// Add a Leading Slash
-	// This makes it look more similiar to Vite 1
-	addLeadingSlash: false,
-
 	// Allow creating a Logger File
 	allowLogging: false,
 
