@@ -8,7 +8,6 @@ export const config: Required<Options> = {
 	deep: true,
 	depth: 1,
 
-	addLeadingSlash: false,
 	allowGlobalAlias: true,
 	allowLogging: false,
 	ignoreDuplicates: false,

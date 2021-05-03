@@ -17,15 +17,11 @@ export function getAliases(options: Partial<Options> = {}) {
 		prefix,
 		deep,
 		depth,
-		addLeadingSlash,
 		allowGlobalAlias,
 		allowLogging,
 		ignoreDuplicates,
 		root,
 	}: Options = Object.assign({}, config, options);
-
-	// add leading Slash to prefix if needed
-	const guide: string = addLeadingSlash ? `/${prefix}` : prefix;
 
 	// get all folders
 	const directories = getDirectories({ path, deep , root, depth });
@@ -36,7 +32,7 @@ export function getAliases(options: Partial<Options> = {}) {
 		const dir = split(path, '/').slice(-1)[0];
 
 		return {
-			find: `${guide}${dir}`,
+			find: `${prefix}${dir}`,
 			replacement: slash(`${path}`)
 		};
 	});
@@ -52,7 +48,7 @@ export function getAliases(options: Partial<Options> = {}) {
 	// add global alias for the whole project folder
 	if (allowGlobalAlias) {
 		aliases.push({
-			find: `${guide}`,
+			find: `${prefix}`,
 			replacement: slash(`${path}`)
 		});
 	}

@@ -34,13 +34,6 @@ export interface Options {
 	depth: number;
 
 	/**
-	 * Add a Leading Slash
-	 * This makes it look more similiar to Vite 1
-	 * @default false
-	 */
-	addLeadingSlash: boolean;
-
-	/**
 	 * Allow creating a Logger File
 	 * @default false
 	 */
