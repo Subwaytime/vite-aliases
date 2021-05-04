@@ -8,7 +8,7 @@ import { log } from '../utils';
  */
 
 export function getDirectories(options: Partial<Options>) {
-	const { path, deep , root, depth } = options;
+	const { path, root, deep, depth } = options;
 
 	const directories = fg.sync(deep ? `${path}/**/*` : `${path}/*`, {
 		ignore: ['node_modules'],
