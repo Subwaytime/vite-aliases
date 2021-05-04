@@ -12,7 +12,8 @@ const config = {
 	],
 	server: {
 		port: 8080
-	}
+	},
+	logLevel: 'silent'
 };
 
 export default config;
