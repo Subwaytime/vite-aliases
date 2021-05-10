@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { writeFile, mkdir } from 'fs';
 
 import type { Alias } from './types';
+import { MODULE_NAME } from './constants';
 
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
@@ -10,7 +11,7 @@ import type { Alias } from './types';
  */
 
 export function slash(string: string) {
-  return string.replace(/\\/g, '/')
+	return string.replace(/\\/g, '/');
 }
 
 /**
@@ -22,16 +23,37 @@ export function slash(string: string) {
 export function split(string: string, seperator: string) {
 	return string.split(seperator);
 }
+
 /**
- *
+ * Turns a Value into Array
+ * @param string
+ * @param seperator
+ */
+
+export function toArray<T>(value: T | T[]): T[] {
+	if(Array.isArray(value)) {
+		return value;
+	} else {
+		return [value];
+	}
+}
+
+/**
+ * Simple Info/Warn/Error Functions
  * @param string
  * @param color
  */
 
-export function log(string: string, color: string = 'red') {
-	return console.log(chalk.keyword(color)(`
-		[vite-aliases]: ${string}
-	`));
+export function info(string: string) {
+	return console.log(chalk.keyword('blue')(`[${MODULE_NAME}]: ${string}`));
+}
+
+export function warn(string: string) {
+	return console.warn(chalk.keyword('yellow')(`[${MODULE_NAME}]: ${string}`));
+}
+
+export function error(string: string) {
+	return console.error(chalk.keyword('red')(`[${MODULE_NAME}]: ${string}`))
 }
 
 /**
@@ -41,18 +63,18 @@ export function log(string: string, color: string = 'red') {
  * @param data
  */
 
-export function createLogfile(path: string, data: Alias[]) {
-	mkdir(`${path}`, { recursive: true }, (error) => {
-		writeFile(`${path}/vite-aliases.json`, JSON.stringify(data), (error) => {
-			if(error) {
-				log('An Error occured while creating the Logfile.');
-			}
-		});
+export function log(path: string, data: Alias[]) {
+	// mkdir(`${path}`, { recursive: true }, (error) => {
+	// 	writeFile(`${path}/vite-aliases.json`, JSON.stringify(data), (error) => {
+	// 		if(error) {
+	// 			error('An Error occured while creating the Logfile.');
+	// 		}
+	// 	});
 
-		if(error) {
-			log('[vite-aliases]: An Error occured while creating the Logfolder.')
-		}
-	});
+	// 	if(error) {
+	// 		error('[vite-aliases]: An Error occured while creating the Logfolder.')
+	// 	}
+	// });
 
-	log('Logfile created!', 'green');
+	// log('Logfile created!', 'green');
 }

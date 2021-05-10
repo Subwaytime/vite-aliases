@@ -1,8 +1,9 @@
 import type { Options } from './types';
 
+export const MODULE_NAME = 'vite-aliases';
+
 export const config: Required<Options> = {
-	path: 'src',
-	log_path: 'src/logs',
+	dir: 'src',
 
 	prefix: '@',
 	deep: true,

@@ -1,7 +1,7 @@
-import { getAliases } from '../src/index';
+import { ViteAliases } from '../src/index';
 import vue from '@vitejs/plugin-vue';
 
-const aliases = getAliases();
+const aliases = ViteAliases();
 
 const config = {
 	resolve: {

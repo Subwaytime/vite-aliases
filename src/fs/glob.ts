@@ -1,16 +1,16 @@
-import type { Options } from '../types';
+import type { Generator } from '../generator';
 import fg from 'fast-glob';
-import { log } from '../utils';
+import { warn } from '../utils';
 
 /**
  * Return all folders from the project directory
  * @param options
  */
 
-export function getDirectories(options: Partial<Options>) {
-	const { path, root, deep, depth } = options;
+export function getDirectories(gen: Generator) {
+	const { dir, root, deep, depth } = gen.options;
 
-	const directories = fg.sync(deep ? `${path}/**/*` : `${path}/*`, {
+	const directories = fg.sync(deep ? `${dir}/**/*` : `${dir}/*`, {
 		ignore: ['node_modules'],
 		onlyDirectories: true,
 		cwd: root,
@@ -19,8 +19,8 @@ export function getDirectories(options: Partial<Options>) {
 	});
 
 	if (!directories.length) {
-		log('No Directories could be found!');
+		warn('No Directories could be found!');
 	}
 
-	return directories;
+	gen.addAlias(directories);
 }

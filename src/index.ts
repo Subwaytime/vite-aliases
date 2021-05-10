@@ -1,62 +1,11 @@
-import type { Alias, Options } from './types';
-import { createLogfile, log, slash, split } from './utils';
+import { Generator } from "./generator";
+import type { Options } from './types';
 
-import { config } from './constants';
-import { getDirectories } from './fs/glob';
+export function ViteAliases(options: Options = {}) {
+	let gen: Generator;
 
-/**
- * Reads the Projectpath and returns Vite Aliases
- * @param options
- * @returns Record<string, string>
- */
+	gen = new Generator(options);
+	gen.glob();
 
-export function getAliases(options: Partial<Options> = {}) {
-	const {
-		path,
-		log_path,
-		prefix,
-		deep,
-		depth,
-		allowGlobalAlias,
-		allowLogging,
-		ignoreDuplicates,
-		root,
-	}: Options = Object.assign({}, config, options);
-
-	// get all folders
-	const directories = getDirectories({ path, deep , root, depth });
-
-	// turn directory array into alias object
-	const aliases: Alias[] = directories.map((path) => {
-		// turn path into array and get last folder
-		const dir = split(path, '/').slice(-1)[0];
-
-		return {
-			find: `${prefix}${dir}`,
-			replacement: slash(`${path}`)
-		};
-	});
-
-	// check for alias duplicates
-	const uniqueAliases = aliases.filter((alias, alias_index, self) => alias_index === self.findIndex((a) => (a.find === alias.find)));
-
-	// output an error message to indicate that some folders share the same name
-	if(ignoreDuplicates && uniqueAliases.length != aliases.length) {
-		log('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'yellow')
-	}
-
-	// add global alias for the whole project folder
-	if (allowGlobalAlias) {
-		aliases.push({
-			find: `${prefix}`,
-			replacement: slash(`${path}`)
-		});
-	}
-
-	// log all aliases into one file
-	if (allowLogging) {
-		createLogfile(log_path, aliases);
-	}
-
-	return uniqueAliases;
+	return gen.aliases;
 }

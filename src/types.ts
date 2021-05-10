@@ -6,14 +6,7 @@ export interface Options {
 	 * Relative path to the project Directory
 	 * @default 'src'
 	 */
-	path: string;
-
-	/**
-	 * Relative path to log the generated Aliases
-	 * @default 'src/logs'
-	 */
-
-	log_path: string;
+	dir: string;
 
 	/**
 	 * Prefix Symbol for the Aliases
@@ -34,7 +27,8 @@ export interface Options {
 	depth: number;
 
 	/**
-	 * Allow creating a Logger File
+	 * Creates a Logfile in `logs` Folder
+	 * Will be relative to project Directory
 	 * @default false
 	 */
 	allowLogging: boolean;
