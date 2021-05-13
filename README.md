@@ -50,7 +50,7 @@ src
 
 will generate the following:
 
-```js
+```ts
 [
 	{
 		find: '@',

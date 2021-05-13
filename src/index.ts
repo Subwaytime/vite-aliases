@@ -4,6 +4,8 @@ import { createLogfile, log, slash, split } from './utils';
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
 
+import { generate } from './generate';
+
 /**
  * Reads the Projectpath and returns Vite Aliases
  * @param options
@@ -21,13 +23,15 @@ export function getAliases(options: Partial<Options> = {}) {
 		allowLogging,
 		ignoreDuplicates,
 		root,
+		genConfig,
+		pathConfig,
 	}: Options = Object.assign({}, config, options);
 
 	// get all folders
 	const directories = getDirectories({ path, deep , root, depth });
 
 	// turn directory array into alias object
-	const aliases: Alias[] = directories.map((path) => {
+	const aliases: Alias[] = directories.map((path:string) => {
 		// turn path into array and get last folder
 		const dir = split(path, '/').slice(-1)[0];
 
@@ -56,6 +60,10 @@ export function getAliases(options: Partial<Options> = {}) {
 	// log all aliases into one file
 	if (allowLogging) {
 		createLogfile(log_path, aliases);
+	}
+
+	if (genConfig) {
+		generate(uniqueAliases, pathConfig);
 	}
 
 	return uniqueAliases;

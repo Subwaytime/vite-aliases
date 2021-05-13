@@ -3,9 +3,21 @@
  */
 export interface Options {
 	/**
-	 * Relative path to the project Directory
-	 * @default 'src'
+	 * Activate config generator
+	 * @default false
 	 */
+	genConfig: boolean;
+
+	/**
+	 * Relative path to the config file
+	 * @default './jsconfig.json'
+	 */
+	pathConfig: string;
+
+	/**
+		 * Relative path to the project Directory
+		 * @default 'src'
+		 */
 	path: string;
 
 	/**
@@ -59,6 +71,10 @@ export interface Options {
 }
 
 export interface Alias {
-	find: string
-	replacement: string
+	find: string;
+	replacement: string;
 };
+
+export interface GeneratedAliases { 
+	[x: string]: string[];
+}
