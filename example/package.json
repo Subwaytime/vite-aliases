@@ -22,10 +22,10 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^1.1.4",
         "@vue/compiler-sfc": "^3.0.5",
-        "vite": "^2.0.0-beta.70",
         "chalk": "^4.1.0",
         "chokidar": "^3.5.1",
         "slash": "^3.0.0",
+        "vite": "^2.0.0-beta.70",
         "vue": "^3.0.5"
     }
 }

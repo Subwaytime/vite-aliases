@@ -1,7 +1,10 @@
 import { getAliases } from '../src/index';
 import vue from '@vitejs/plugin-vue';
 
-const aliases = getAliases();
+const aliases = getAliases({
+	genConfig: true,
+	pathConfig: './jsconfig.json'
+});
 
 const config = {
 	resolve: {
@@ -13,7 +16,7 @@ const config = {
 	server: {
 		port: 8080
 	},
-	logLevel: 'silent'
+	logLevel: 'info'
 };
 
 export default config;

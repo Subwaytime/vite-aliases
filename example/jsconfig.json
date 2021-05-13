@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@componaaaents/*": [
+        "/home/tsanyqudsi/Documents/github/vite-aliases/example/src/componenaaats/*"
+      ],
+      "@components/*": [
+        "/home/tsanyqudsi/Documents/github/vite-aliases/example/src/components/*"
+      ],
+      "@utils/*": [
+        "/home/tsanyqudsi/Documents/github/vite-aliases/example/src/utils/*"
+      ],
+      "@pages/*": [
+        "/home/tsanyqudsi/Documents/github/vite-aliases/example/src/pages/*"
+      ]
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    ".vscode",
+    ".nuxt",
+    "coverage",
+    "jspm_packages",
+    "tmp",
+    "temp",
+    "bower_components",
+    ".npm",
+    ".yarn"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  }
+}
