@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 
 const aliases = getAliases({
 	genConfig: true,
-	pathConfig: './jsconfig.json'
 });
 
 const config = {
