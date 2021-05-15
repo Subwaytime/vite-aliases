@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {defaultJson } from '../constants';
+import { defaultJSConfig, defaultTSConfig } from '../constants';
 import { GeneratedAliases } from '../types';
 
 function checkAccess(config:string){
@@ -20,7 +20,11 @@ function checkFile(config:string){
     console.log(`${config} exists :`)
   } else {
     console.log(`${config} don't exists, creating file`)
-    fs.writeFileSync(config,JSON.stringify(defaultJson, null, 2))
+    if(config.includes('jsconfig')) {
+      fs.writeFileSync(config,JSON.stringify(defaultJSConfig, null, 2))
+    } else {
+      fs.writeFileSync(config,JSON.stringify(defaultTSConfig, null, 2))
+    }
   }
 }
 

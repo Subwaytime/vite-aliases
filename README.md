@@ -81,11 +81,18 @@ will generate the following:
 
 ## Configuration
 
-Current available Options:
+Current available Options and their default values:
 
 ```ts
 getAliases({
-	// Relative path to the project Directory
+
+	// Activate config generator
+	genConfig: false;
+
+	// Relative path to the config file
+	pathConfig: './jsconfig.json';
+
+// Relative path to the project Directory
 	path: 'src',
 
 	// Relative path to log the generated Aliases

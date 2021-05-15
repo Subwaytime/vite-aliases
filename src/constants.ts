@@ -17,7 +17,7 @@ export const config: Required<Options> = {
 	root: process.cwd(),
 };
 
-export const defaultJson = {
+export const defaultJSConfig = {
   "compilerOptions": {
     "checkJs": false,
     "resolveJsonModule": true
@@ -39,4 +39,25 @@ export const defaultJson = {
   "typeAcquisition": {
     "enable": true
   }
+}
+
+export const defaultTSConfig = {
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["DOM", "DOM.Iterable", "ES2019", "ES2020"],
+    "types": ["vite/client","node"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": ["./src"]
 }
