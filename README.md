@@ -20,9 +20,9 @@ Add it to `vite.config.js`
 
 ```ts
 // vite.config.js
-import { getAliases } from 'vite-aliases'
+import { ViteAliases } from 'vite-aliases'
 
-const aliases = getAliases();
+const aliases = ViteAliases();
 
 export default {
 	resolve: {
@@ -87,9 +87,6 @@ Current available Options:
 getAliases({
 	// Relative path to the project Directory
 	path: 'src',
-
-	// Relative path to log the generated Aliases
-	log_path: 'src/logs',
 
 	// Prefix Symbol for the Aliases
 	prefix: '@',
