@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import type { Alias, Options } from './types';
 import {log, info, warn, error, slash, split, toArray } from './utils';
 
@@ -24,26 +25,28 @@ export class Generator {
 
 		const {
 			dir,
+			depth,
 			root,
 			allowGlobalAlias,
 		}: Options = this.options;
 
-		// WIP
-		// watch for directory changes
-		const watcher = chokidar.watch(dir, { ignoreInitial: true, cwd: root });
+		const folder = slash(resolve(root, dir)); // needed for absolute paths in watcher
 
 		if(allowGlobalAlias) {
-			this.addAlias(dir);
+			this.addAlias(folder);
 		}
 
-		watcher.on('unlink', (path) => {
-			console.log(path);
+		// WIP
+		// watch for directory changes
+		const watcher = chokidar.watch(folder, { ignoreInitial: true, depth: depth });
+
+		watcher.on('addDir', (path) => {
 			this.addAlias(path);
 		})
-		.on('add', (path) => {
-			console.log(path);
+		.on('unlinkDir', (path) => {
 			this.removeAlias(path);
 		});
+
 
 		// TODO: Use set instead of Array
 		// if(ignoreDuplicates) {
@@ -58,6 +61,7 @@ export class Generator {
 
 	addAlias(path: string | string []) {
 		toArray(path).forEach((p) => {
+			p = slash(p);
 			// turn path into array and get last folder
 			const dir = split(p, '/').slice(-1)[0];
 
@@ -65,9 +69,9 @@ export class Generator {
 
 			this.aliases.push({
 				find: `${this.options.prefix}${dir}`,
-				replacement: slash(`${p}`)
+				replacement: `${p}`
 			});
-		})
+		});
 	}
 
 	/**
@@ -77,10 +81,13 @@ export class Generator {
 
 	removeAlias(path: string | string[]) {
 		toArray(path).forEach((p) => {
+			p = slash(p);
 			if(this.directories.has(p)) {
 				this.directories.delete(p);
+
+				this.aliases = this.aliases.filter((a) => a.replacement != p);
 			}
-		})
+		});
 	}
 
 	/**
@@ -108,6 +115,5 @@ export class Generator {
 
 		getDirectories(this);
 		this.searched =  true;
-		console.log(this.aliases);
 	}
 }
