@@ -50,7 +50,7 @@ src
 
 will generate the following:
 
-```js
+```ts
 [
 	{
 		find: '@',
@@ -84,9 +84,9 @@ will generate the following:
 Current available Options:
 
 ```ts
-getAliases({
+ViteAliases({
 	// Relative path to the project Directory
-	path: 'src',
+	dir: 'src',
 
 	// Prefix Symbol for the Aliases
 	prefix: '@',
@@ -122,4 +122,4 @@ due to this tiny Library beeing inspired by both Projects:
 
 ## License
 
-MIT License © 2020 [Leon Langer](https://github.com/subwaytime)
+MIT License © 2020-2021 [Leon Langer](https://github.com/subwaytime)
