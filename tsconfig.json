@@ -11,7 +11,15 @@
         "strictNullChecks": true,
         "moduleResolution": "Node",
         "resolveJsonModule": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": "./src",
+        "paths": {
+          "@assets/*": ["./assets/*"],
+          "@components/*": ["./components/*"],
+          "@pages/*": ["./pages/*"],
+          "@store/*": ["./store/*"],
+          "@utils/*": ["./store/*"]
+        }
     },
     "exclude": [
         "**/dist",
