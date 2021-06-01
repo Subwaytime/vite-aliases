@@ -1,11 +1,12 @@
 import { resolve } from 'path';
-import type { Alias, Options } from './types';
-import {log, info, warn, error, slash, split, toArray } from './utils';
+import type { Alias, ConfigPath, Options } from './types';
+import { slash, split, toArray } from './utils';
 
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
+import { writeLog } from './fs/log';
+import { writeConfig } from './fs/config';
 import chokidar from 'chokidar';
-
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -19,6 +20,7 @@ export class Generator {
 
 	public aliases: Alias[] = [];
 	public directories = new Set<string>();
+	public configPaths: ConfigPath = {};
 
 	constructor(options: Options) {
 		this.options = Object.assign({}, config, options);
@@ -59,18 +61,21 @@ export class Generator {
 	 * @param path
 	 */
 
-	addAlias(path: string | string []) {
+	addAlias(path: string | string[]) {
 		toArray(path).forEach((p) => {
 			p = slash(p);
 			// turn path into array and get last folder
 			const dir = split(p, '/').slice(-1)[0];
+			const key = `${this.options.prefix}${dir}`;
 
 			this.directories.add(p);
 
 			this.aliases.push({
-				find: `${this.options.prefix}${dir}`,
+				find: `${key}`,
 				replacement: `${p}`
 			});
+
+			this.addConfigPath(key, p);
 		});
 	}
 
@@ -82,25 +87,49 @@ export class Generator {
 	removeAlias(path: string | string[]) {
 		toArray(path).forEach((p) => {
 			p = slash(p);
+			// turn path into array and get last folder
+			const dir = split(p, '/').slice(-1)[0];
+			const key = `${this.options.prefix}${dir}`;
+
 			if(this.directories.has(p)) {
 				this.directories.delete(p);
 
-				this.aliases = this.aliases.filter((a) => a.replacement != p);
+				this.aliases = this.aliases.filter((a) => a.find != key);
+				this.removeConfigPath(`${key}`)
 			}
 		});
 	}
 
 	/**
 	 *
+	 * @param key
+	 * @param path
 	 */
 
-	uniquify() {
-		const uniques = this.aliases.filter((alias, alias_index, self) => alias_index === self.findIndex((a) => (a.find === alias.find)));
-
-		if(uniques.length != this.aliases.length) {
-			warn('There are duplicates to be found in your Folderstructure! Enable Logging to see them.');
-		}
+	addConfigPath(key: string, path: string) {
+		this.configPaths[key] = [path];
 	}
+
+	/**
+	 *
+	 * @param key
+	 */
+
+	removeConfigPath(key: string) {
+		delete this.configPaths[key];
+	}
+
+	/**
+	 *
+	 */
+
+	// uniquify() {
+	// 	const uniques = this.aliases.filter((alias, alias_index, self) => alias_index === self.findIndex((a) => (a.find === alias.find)));
+
+	// 	if(uniques.length != this.aliases.length) {
+	// 		warn('There are duplicates to be found in your Folderstructure! Enable Logging to see them.');
+	// 	}
+	// }
 
 	/**
 	 *
@@ -115,5 +144,13 @@ export class Generator {
 
 		getDirectories(this);
 		this.searched =  true;
+
+		if(this.options.allowLogging) {
+			writeLog(this);
+		}
+
+		if(this.options.useConfig) {
+			writeConfig(this);
+		}
 	}
 }
