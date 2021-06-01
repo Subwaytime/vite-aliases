@@ -1,7 +1,4 @@
 import chalk from 'chalk';
-import { writeFile, mkdir } from 'fs';
-
-import type { Alias } from './types';
 import { MODULE_NAME } from './constants';
 
 /**
@@ -39,42 +36,17 @@ export function toArray<T>(value: T | T[]): T[] {
 }
 
 /**
- * Simple Info/Warn/Error Functions
+ * Simple Info/Warn/Error Function
  * @param string
  * @param color
  */
 
-export function info(string: string) {
-	return console.log(chalk.keyword('blue')(`[${MODULE_NAME}]: ${string}`));
-}
+export function terminal(string: string, type: string = 'info') {
+	const types: { [index: string]: any } = {
+		info: chalk.hex('#228be6'),
+		warning: chalk.hex('#fab005'),
+		error: chalk.hex('#e03131'),
+	};
 
-export function warn(string: string) {
-	return console.warn(chalk.keyword('yellow')(`[${MODULE_NAME}]: ${string}`));
-}
-
-export function error(string: string) {
-	return console.error(chalk.keyword('red')(`[${MODULE_NAME}]: ${string}`))
-}
-
-/**
- * Creates a Logfile
- * If needed it will also create a Logfolder
- * @param path
- * @param data
- */
-
-export function log(path: string, data: Alias[]) {
-	// mkdir(`${path}`, { recursive: true }, (error) => {
-	// 	writeFile(`${path}/vite-aliases.json`, JSON.stringify(data), (error) => {
-	// 		if(error) {
-	// 			error('An Error occured while creating the Logfile.');
-	// 		}
-	// 	});
-
-	// 	if(error) {
-	// 		error('[vite-aliases]: An Error occured while creating the Logfolder.')
-	// 	}
-	// });
-
-	// log('Logfile created!', 'green');
+	return console.log(types[type](`[${MODULE_NAME}]: ${string}`));
 }
