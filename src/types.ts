@@ -46,6 +46,20 @@ export interface Options {
 	ignoreDuplicates: boolean
 
 	/**
+	 * Generates Paths in IDE Config File
+	 * Works with JS oder TS
+	 * For Typescript: set `useTypescript` true
+	 */
+	useConfig: boolean
+
+
+	/**
+	 * Will generate Paths in tsconfig
+	 * Used in Combination with `useConfig`
+	 */
+	useTypescript: boolean
+
+	/**
 	 * Root path of Vite project
 	 * @default 'process.cwd()'
 	 */
@@ -56,3 +70,5 @@ export interface Alias {
 	find: string
 	replacement: string
 };
+
+export type ConfigPath = Record<string, [string]>;
