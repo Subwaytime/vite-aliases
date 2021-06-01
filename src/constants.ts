@@ -18,3 +18,9 @@ export const config: Required<Options> = {
 
 	root: process.cwd(),
 };
+
+export const IDEConfig = {
+	"compilerOptions": {
+		"paths": {}
+	}
+};
