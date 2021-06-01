@@ -1,4 +1,4 @@
-import { Generator } from "./generator";
+import { Generator } from './generator';
 import type { Options } from './types';
 
 export function ViteAliases(options: Options = {}) {
