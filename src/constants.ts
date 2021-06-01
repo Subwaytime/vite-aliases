@@ -9,6 +9,9 @@ export const config: Required<Options> = {
 	deep: true,
 	depth: 1,
 
+	useConfig: false,
+	useTypescript: false,
+
 	allowGlobalAlias: true,
 	allowLogging: false,
 	ignoreDuplicates: false,
