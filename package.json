@@ -29,7 +29,7 @@
         "update:packages": "npm update --save-dev && npm update --save",
         "dev": "npm run build -- --watch",
         "build": "tsup src/index.ts --dts --format cjs,esm",
-        "release": "npx git-ensure -a && npx bumpp --commit --tag --push",
+        "release": "npx git-ensure -a && npx bumpp --commit --tag --push && npm publish",
         "prepublishOnly": "npm run build"
     },
     "devDependencies": {
