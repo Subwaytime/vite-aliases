@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import type { Alias, ConfigPath, Options } from './types';
-import { slash, split, toArray } from './utils';
+import { slash, split, terminal, toArray } from './utils';
 
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
@@ -48,12 +48,6 @@ export class Generator {
 		.on('unlinkDir', (path) => {
 			this.removeAlias(path);
 		});
-
-
-		// TODO: Use set instead of Array
-		// if(ignoreDuplicates) {
-		// 	this.uniquify();
-		// }
 	}
 
 	/**
@@ -67,6 +61,10 @@ export class Generator {
 			// turn path into array and get last folder
 			const dir = split(p, '/').slice(-1)[0];
 			const key = `${this.options.prefix}${dir}`;
+
+			if(this.directories.has(p)) {
+				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'warn');
+			}
 
 			this.directories.add(p);
 
