@@ -16,10 +16,11 @@ export function writeLog(gen: Generator) {
 	}
 
 	const folder = slash(`${dir}/logs`);
+	const file = slash(`${folder}/${MODULE_NAME}.json`);
 	const data = gen.aliases;
 
 	mkdir(`${folder}`, { recursive: true }, (error) => {
-		writeFile(`${folder}/${MODULE_NAME}.json`, JSON.stringify(data), (error) => {
+		writeFile(`${file}`, JSON.stringify(data), (error) => {
 			if (error) {
 				terminal('An Error occured while creating the Log File!', 'warn');
 			}
