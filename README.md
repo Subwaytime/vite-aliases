@@ -10,6 +10,8 @@
 
 ## Usage
 
+**Read here for current News on Version 0.7.0 --> https://github.com/Subwaytime/vite-aliases/issues/18**
+
 Install
 
 ```bash
@@ -85,28 +87,58 @@ Current available Options:
 
 ```ts
 ViteAliases({
-	// Relative path to the project Directory
+	/**
+	 * Relative path to the project Directory
+	 */
 	dir: 'src',
 
-	// Prefix Symbol for the Aliases
+	/**
+	 * Prefix Symbol for the Aliases
+	 */
 	prefix: '@',
 
-	// Allow Searching for Subdirectories
+	/**
+	 * Allow Searching for Subdirectories
+	 */
 	deep: true,
 
-	// Search Depthlevel for Subdirectories
+	/**
+	 * Search Depthlevel for Subdirectories
+	 */
 	depth: 1,
 
-	// Allow creating a Logger File
+	/**
+	 * Creates a Logfile in `logs` Folder
+	 * Will be relative to project Directory
+	 */
 	allowLogging: false,
 
-	// Allow global project Directory alias
+	/**
+	 * Allow global project Directory alias
+	 */
 	allowGlobalAlias: true,
 
-	// Ignore Error on Duplicate Folders
+	/**
+	 * Ignore Error on Duplicate Folders
+	 */
 	ignoreDuplicates: false,
 
-	// Root path of Vite project
+	/**
+	 * Generates Paths in IDE Config File
+	 * Works with JS oder TS
+	 * For Typescript: set `useTypescript` true
+	 */
+	useConfig: false,
+
+	/**
+	 * Will generate Paths in tsconfig
+	 * Used in Combination with `useConfig`
+	 */
+	useTypescript: false,
+
+	/**
+	 * Root path of Vite project
+	 */
 	root: process.cwd()
 });
 ```

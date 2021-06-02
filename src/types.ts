@@ -49,12 +49,14 @@ export interface Options {
 	 * Generates Paths in IDE Config File
 	 * Works with JS oder TS
 	 * For Typescript: set `useTypescript` true
+	 * @default false
 	 */
 	useConfig: boolean
 
 	/**
 	 * Will generate Paths in tsconfig
 	 * Used in Combination with `useConfig`
+	 * @default false
 	 */
 	useTypescript: boolean
 
