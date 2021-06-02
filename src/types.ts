@@ -52,7 +52,6 @@ export interface Options {
 	 */
 	useConfig: boolean
 
-
 	/**
 	 * Will generate Paths in tsconfig
 	 * Used in Combination with `useConfig`
