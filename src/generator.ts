@@ -62,8 +62,12 @@ export class Generator {
 			const dir = split(p, '/').slice(-1)[0];
 			const key = `${this.options.prefix}${dir}`;
 
-			if(this.directories.has(p)) {
-				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'warn');
+			if(this.aliases.some(a => a.find === key) || this.directories.has(p)) {
+				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'warning');
+
+				if(!this.options.ignoreDuplicates) {
+					throw new Error('Duplicate Aliases');
+				}
 			}
 
 			this.directories.add(p);
@@ -116,18 +120,6 @@ export class Generator {
 	removeConfigPath(key: string) {
 		delete this.configPaths[key];
 	}
-
-	/**
-	 *
-	 */
-
-	// uniquify() {
-	// 	const uniques = this.aliases.filter((alias, alias_index, self) => alias_index === self.findIndex((a) => (a.find === alias.find)));
-
-	// 	if(uniques.length != this.aliases.length) {
-	// 		warn('There are duplicates to be found in your Folderstructure! Enable Logging to see them.');
-	// 	}
-	// }
 
 	/**
 	 *
