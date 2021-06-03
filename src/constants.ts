@@ -20,7 +20,8 @@ export const config: Required<Options> = {
 };
 
 export const IDEConfig = {
-	"compilerOptions": {
-		"paths": {}
-	}
+	baseUrl: '.',
+	compilerOptions: {
+		paths: {},
+	},
 };
