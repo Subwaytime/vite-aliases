@@ -23,7 +23,8 @@ export function writeConfig(gen: Generator) {
 		data = JSON.parse(readFileSync(`${file}`).toString());
 		data.compilerOptions.paths = { ...data.compilerOptions.paths, ...gen.configPaths };
 	} else {
-		data = IDEConfig.compilerOptions.paths = { ...gen.configPaths };
+		IDEConfig.compilerOptions.paths = { ...gen.configPaths };
+		data = IDEConfig;
 	}
 
 	writeFile(`${file}`, JSON.stringify(data), (error) => {
