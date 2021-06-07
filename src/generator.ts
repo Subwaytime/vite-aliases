@@ -22,7 +22,7 @@ export class Generator {
 	public directories = new Set<string>();
 	public configPaths: ConfigPath = {};
 
-	constructor(options: Options) {
+	constructor(options: Partial<Options>) {
 		this.options = Object.assign({}, config, options);
 
 		const {
