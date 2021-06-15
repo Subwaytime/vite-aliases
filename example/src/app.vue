@@ -3,6 +3,7 @@
 		<h1> Vite Aliases Example </h1>
 		<home />
 		<navigation />
+		<test />
 		<div class="box">
 			<p>
 				Randomized Hexcode
@@ -22,6 +23,7 @@
 import { ref } from 'vue';
 
 import home from '@pages/home.vue';
+import test from '@pagesComponents/test.vue';
 import navigation from '@components/navigation.vue';
 import { random } from '@utils/random';
 
@@ -29,6 +31,7 @@ export default {
 	name: 'app',
 	components: {
 		home,
+		test,
 		navigation
 	},
 	setup() {
