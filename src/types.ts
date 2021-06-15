@@ -40,10 +40,11 @@ export interface Options {
 	allowGlobalAlias: boolean;
 
 	/**
-	 * Ignore Error on Duplicate Folders
+	 * Turns Duplicates into camelCased Aliases
+	 * for more information: checkout example
 	 * @default false
 	 */
-	ignoreDuplicates: boolean
+	adjustDuplicates: boolean
 
 	/**
 	 * Generates Paths in IDE Config File

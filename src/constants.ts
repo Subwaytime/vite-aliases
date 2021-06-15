@@ -11,7 +11,7 @@ export const config: Required<Options> = {
 
 	allowGlobalAlias: true,
 	allowLogging: false,
-	ignoreDuplicates: false,
+	adjustDuplicates: false,
 
 	useConfig: false,
 	useTypescript: false,
