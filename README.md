@@ -24,12 +24,10 @@ Add it to `vite.config.js`
 // vite.config.js
 import { ViteAliases } from 'vite-aliases'
 
-const aliases = ViteAliases();
-
 export default {
-	resolve: {
-		alias: aliases
-	}
+	plugins: [
+		ViteAliases()
+	]
 };
 ```
 
