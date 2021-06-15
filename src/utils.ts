@@ -4,7 +4,6 @@ import { MODULE_NAME } from './constants';
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
  * @param string
- * @returns
  */
 
 export function slash(string: string) {
@@ -33,6 +32,15 @@ export function toArray<T>(value: T | T[]): T[] {
 	} else {
 		return [value];
 	}
+}
+
+/**
+ * Turns any String into Camelcased String
+ * @param string
+ */
+
+export function toCamelCase(string: string) {
+	return string.trim().replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''));
 }
 
 /**
