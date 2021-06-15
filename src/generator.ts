@@ -1,7 +1,6 @@
-import { ResolvedConfig } from 'vite';
 import { resolve } from 'path';
 import type { Alias, ConfigPath, Options } from './types';
-import { slash, split, terminal, toArray } from './utils';
+import { slash, split, terminal, toArray, toCamelCase } from './utils';
 
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
@@ -62,14 +61,23 @@ export class Generator {
 		toArray(path).forEach((p) => {
 			p = slash(p);
 			// turn path into array and get last folder
-			const dir = split(p, '/').slice(-1)[0];
-			const key = `${this.options.prefix}${dir}`;
+			const lastdir = split(p, '/').slice(-1)[0];
+			let key = `${this.options.prefix}${lastdir}`;
 
 			if(this.aliases.some(a => a.find === key) || this.directories.has(p)) {
-				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them.', 'warning');
+				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them or enable adjustDuplicates.', 'warning');
 
-				if(!this.options.ignoreDuplicates) {
-					throw new Error('Duplicate Aliases');
+				const firstdir = split(p, '/').slice(-this.options.depth)[0];
+
+				if(firstdir === lastdir) {
+					terminal(`${firstdir} should not contain ${lastdir} with the exact name`, 'warning');
+					throw new Error();
+				}
+
+				if(this.options.adjustDuplicates) {
+					if (firstdir != this.options.dir) {
+						key = `${this.options.prefix}${toCamelCase(`${firstdir}-${lastdir}`)}`;
+					}
 				}
 			}
 
