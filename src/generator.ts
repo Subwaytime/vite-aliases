@@ -1,3 +1,4 @@
+import { ResolvedConfig } from 'vite';
 import { resolve } from 'path';
 import type { Alias, ConfigPath, Options } from './types';
 import { slash, split, terminal, toArray } from './utils';
@@ -22,7 +23,7 @@ export class Generator {
 	public directories = new Set<string>();
 	public configPaths: ConfigPath = {};
 
-	constructor(options?: Partial<Options>) {
+	constructor(public readonly servermode: String, options?: Partial<Options>) {
 		this.options = Object.assign({}, config, options);
 
 		const {
@@ -38,16 +39,18 @@ export class Generator {
 			this.addAlias(folder);
 		}
 
-		// WIP
-		// watch for directory changes
-		const watcher = chokidar.watch(folder, { ignoreInitial: true, depth: depth });
+		// only watch on dev not on build
+		if (servermode === 'serve') {
+			// watch for directory changes
+			const watcher = chokidar.watch(folder, { ignoreInitial: true, depth: depth });
 
-		watcher.on('addDir', (path) => {
-			this.addAlias(path);
-		})
-		.on('unlinkDir', (path) => {
-			this.removeAlias(path);
-		});
+			watcher.on('addDir', (path) => {
+				this.addAlias(path);
+			})
+			.on('unlinkDir', (path) => {
+				this.removeAlias(path);
+			});
+		}
 	}
 
 	/**
