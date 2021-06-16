@@ -53,7 +53,7 @@ export class Generator {
 	}
 
 	/**
-	 *
+	 * Add Alias
 	 * @param path
 	 */
 
@@ -93,7 +93,7 @@ export class Generator {
 	}
 
 	/**
-	 *
+	 * Remove Alias
 	 * @param path
 	 */
 
@@ -114,7 +114,9 @@ export class Generator {
 	}
 
 	/**
-	 *
+	 * Glob Directories
+	 * writes Logfile
+	 * writes IDE Config
 	 */
 
 	private searched: boolean = false;
