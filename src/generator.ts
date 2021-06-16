@@ -88,7 +88,7 @@ export class Generator {
 				replacement: `${p}`
 			});
 
-			this.addConfigPath(key, p);
+			this.configPaths[key] = [p];
 		});
 	}
 
@@ -108,28 +108,9 @@ export class Generator {
 				this.directories.delete(p);
 
 				this.aliases = this.aliases.filter((a) => a.find != key);
-				this.removeConfigPath(`${key}`)
+				delete this.configPaths[key];
 			}
 		});
-	}
-
-	/**
-	 *
-	 * @param key
-	 * @param path
-	 */
-
-	addConfigPath(key: string, path: string) {
-		this.configPaths[key] = [path];
-	}
-
-	/**
-	 *
-	 * @param key
-	 */
-
-	removeConfigPath(key: string) {
-		delete this.configPaths[key];
 	}
 
 	/**
