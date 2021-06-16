@@ -73,4 +73,6 @@ export interface Alias {
 	replacement: string
 };
 
-export type ConfigPath = Record<string, [string]>;
+export type ConfigPath = {
+	[key: string]: Array<string>
+};
