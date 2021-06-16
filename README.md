@@ -10,8 +10,6 @@
 
 ## Usage
 
-**Read here for current News on Version 0.7 --> https://github.com/Subwaytime/vite-aliases/issues/18**
-
 Install
 
 ```bash
