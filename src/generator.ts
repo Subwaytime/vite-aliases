@@ -17,6 +17,7 @@ import chokidar from 'chokidar';
 export class Generator {
 
 	readonly options: Options;
+	readonly fullPath: string;
 
 	public aliases: Alias[] = [];
 	public directories = new Set<string>();
@@ -29,19 +30,14 @@ export class Generator {
 			dir,
 			depth,
 			root,
-			allowGlobalAlias,
 		}: Options = this.options;
 
-		const folder = slash(resolve(root, dir)); // needed for absolute paths in watcher
-
-		if(allowGlobalAlias) {
-			this.addAlias(folder);
-		}
+		this.fullPath = slash(resolve(root, dir)); // needed for absolute paths in watcher
 
 		// only watch on dev not on build
 		if (servermode === 'serve') {
 			// watch for directory changes
-			const watcher = chokidar.watch(folder, { ignoreInitial: true, depth: depth });
+			const watcher = chokidar.watch(this.fullPath, { ignoreInitial: true, depth: depth });
 
 			watcher.on('addDir', (path) => {
 				this.addAlias(path);
@@ -61,23 +57,27 @@ export class Generator {
 		toArray(path).forEach((p) => {
 			p = slash(p);
 			// turn path into array and get last folder
-			const lastdir = split(p, '/').slice(-1)[0];
-			let key = `${this.options.prefix}${lastdir}`;
+			const folders = split(p.replace(this.fullPath, this.options.dir), '/').filter(Boolean);
+			const lastDir = folders.slice(-1)[0];
+			let key = `${this.options.prefix}${lastDir}`;
 
-			if(this.aliases.some(a => a.find === key) || this.directories.has(p)) {
-				terminal('There are duplicates to be found in your Folderstructure! Enable Logging to see them or enable adjustDuplicates.', 'warning');
-
-				const firstdir = split(p, '/').slice(-this.options.depth)[0];
-
-				if(firstdir === lastdir) {
-					terminal(`${firstdir} should not contain ${lastdir} with the exact name`, 'warning');
-					throw new Error();
-				}
-
-				if(this.options.adjustDuplicates) {
-					if (firstdir != this.options.dir) {
-						key = `${this.options.prefix}${toCamelCase(`${firstdir}-${lastdir}`)}`;
+			const uniques = [...new Set(folders)];
+			if(folders.length !== uniques.length) {
+				const duplicates = [...folders].sort().filter((f, i, self) => {
+					if(self[i + 1] === self[i]) {
+						return f;
 					}
+				});
+
+				terminal(`Path: '${p}' contains multiple folders with same name: ${duplicates.toString()}`, 'warning');
+			}
+
+			if(this.aliases.some(a => a.find === key)) {
+				terminal('There are duplicate Aliases generated, either fix the folderstructure or enable adjustDuplicates', 'warning');
+
+				if(this.options.adjustDuplicates && this.options.depth > 1) {
+					const name = folders.filter(f => !split(slash(this.options.dir), '/').includes(f)).join('-');
+					key = `${this.options.prefix}${toCamelCase(name)}`;
 				}
 			}
 
@@ -100,15 +100,17 @@ export class Generator {
 	removeAlias(path: string | string[]) {
 		toArray(path).forEach((p) => {
 			p = slash(p);
-			// turn path into array and get last folder
-			const dir = split(p, '/').slice(-1)[0];
-			const key = `${this.options.prefix}${dir}`;
 
 			if(this.directories.has(p)) {
 				this.directories.delete(p);
 
-				this.aliases = this.aliases.filter((a) => a.find != key);
-				delete this.configPaths[key];
+				this.aliases = this.aliases.filter((a) => a.replacement != p);
+
+				Object.keys(this.configPaths).find((cp) => {
+					if(this.configPaths[cp][0] === p) {
+						delete this.configPaths[cp];
+					}
+				})
 			}
 		});
 	}
@@ -126,15 +128,21 @@ export class Generator {
 			return;
 		}
 
-		getDirectories(this);
-		this.searched =  true;
+		if (this.options.allowGlobalAlias) {
+			this.addAlias(this.fullPath);
+		}
 
-		if(this.options.allowLogging) {
+		getDirectories(this);
+		this.searched = true;
+
+		if (this.options.allowLogging) {
 			writeLog(this);
 		}
 
-		if(this.options.useConfig) {
+		if (this.options.useConfig) {
 			writeConfig(this);
 		}
+
+		console.log(this.aliases);
 	}
 }
