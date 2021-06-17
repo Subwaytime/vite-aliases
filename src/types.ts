@@ -40,11 +40,10 @@ export interface Options {
 	allowGlobalAlias: boolean;
 
 	/**
-	 * Turns Duplicates into camelCased Aliases
-	 * for more information: checkout example
+	 * Turns Duplicates into camelCased Path Aliases
 	 * @default false
 	 */
-	adjustDuplicates: boolean
+	adjustDuplicates: boolean;
 
 	/**
 	 * Generates Paths in IDE Config File
@@ -52,14 +51,14 @@ export interface Options {
 	 * For Typescript: set `useTypescript` true
 	 * @default false
 	 */
-	useConfig: boolean
+	useConfig: boolean;
 
 	/**
 	 * Will generate Paths in tsconfig
 	 * Used in Combination with `useConfig`
 	 * @default false
 	 */
-	useTypescript: boolean
+	useTypescript: boolean;
 
 	/**
 	 * Root path of Vite project
