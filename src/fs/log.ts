@@ -22,15 +22,15 @@ export function writeLog(gen: Generator) {
 	mkdir(`${folder}`, { recursive: true }, (error) => {
 		writeFile(`${file}`, JSON.stringify(data), (error) => {
 			if (error) {
-				terminal('An Error occured while creating the Log File!', 'warning');
+				terminal('An Error occured while creating the log File!', 'warning');
 			}
 		});
 
 		if (error) {
-			terminal('An Error occured while creating the Log Folder.', 'warning');
+			terminal('An Error occured while creating the logfolder.', 'warning');
 		}
 	});
 
-	terminal('Log File successfully created!');
+	terminal('Logfile successfully created!');
 	return;
 }

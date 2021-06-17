@@ -29,10 +29,10 @@ export function writeConfig(gen: Generator) {
 
 	writeFile(`${file}`, JSON.stringify(data), (error) => {
 		if (error) {
-			terminal(`An Error occured while creating the ${name} File`, 'error');
+			terminal(`An Error occured while creating the ${name} file`, 'error');
 		}
 	});
 
-	terminal(`${name} File successfully created!`);
+	terminal(`${name} file successfully created!`);
 	return;
 }
