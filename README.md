@@ -77,6 +77,20 @@ will generate the following:
 ]
 ```
 
+## Best Practice
+
+`vite-aliases` is meant to simply take the first Layer of your Projectfolders and turn it into useful Shortcuts.
+Therefore i advise you to use the default Configuration and do not use Folders with the same name, otherwise it will create an Error.
+
+If however you need duplicate Foldernames, enable `adjustDuplicates`.
+This will turn the entire Filepath of said Duplicate into the alias itself, like shown in the Example below.
+
+Example:
+`src/components` -> `@components`
+`src/pages/components` -> `@pagesComponents`
+`src/test/new/partials/components` -> `@testNewPartialsComponents`
+and so on..
+
 ## Configuration
 
 Current available Options:
@@ -115,9 +129,9 @@ ViteAliases({
 	allowGlobalAlias: true,
 
 	/**
-	 * Ignore Error on Duplicate Folders
+	 * Turns Duplicates into camelCased Path Aliases
 	 */
-	ignoreDuplicates: false,
+	adjustDuplicates: false,
 
 	/**
 	 * Generates Paths in IDE Config File
