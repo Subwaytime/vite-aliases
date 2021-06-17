@@ -5,7 +5,6 @@ const config = {
 	plugins: [
 		vue(),
 		ViteAliases({
-			depth: 2,
 			useConfig: true,
 			useTypescript: true,
 			allowLogging: true,
