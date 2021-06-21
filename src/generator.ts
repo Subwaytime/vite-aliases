@@ -142,7 +142,5 @@ export class Generator {
 		if (this.options.useConfig) {
 			writeConfig(this);
 		}
-
-		console.log(this.aliases);
 	}
 }
