@@ -1,12 +1,12 @@
-import { resolve } from 'path';
 import type { Alias, ConfigPath, Options } from './types';
 import { slash, split, terminal, toArray, toCamelCase } from './utils';
 
+import chokidar from 'chokidar';
 import { config } from './constants';
 import { getDirectories } from './fs/glob';
-import { writeLog } from './fs/log';
+import { resolve } from 'path';
 import { writeConfig } from './fs/config';
-import chokidar from 'chokidar';
+import { writeLog } from './fs/log';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -88,7 +88,7 @@ export class Generator {
 				replacement: `${p}`
 			});
 
-			this.configPaths[key] = [p];
+			this.configPaths[`${key}/*`] = [p];
 		});
 	}
 
