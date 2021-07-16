@@ -1,7 +1,8 @@
 import { mkdir, writeFile } from 'fs';
-import { MODULE_NAME } from '../constants';
-import type { Generator } from '../generator';
 import { slash, terminal } from '../utils';
+
+import type { Generator } from '../generator';
+import { MODULE_NAME } from '../constants';
 
 /**
  * Creates a Logfile
@@ -20,7 +21,7 @@ export function writeLog(gen: Generator) {
 	const data = gen.aliases;
 
 	mkdir(`${folder}`, { recursive: true }, (error) => {
-		writeFile(`${file}`, JSON.stringify(data), (error) => {
+		writeFile(`${file}`, JSON.stringify(data, null, 4), (error) => {
 			if (error) {
 				terminal('An Error occured while creating the log File!', 'warning');
 			}

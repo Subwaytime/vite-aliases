@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFile } from 'fs';
-import type { Generator } from '../generator';
 import { slash, terminal } from '../utils';
+
+import type { Generator } from '../generator';
 import { IDEConfig } from '../constants';
 
 /**
@@ -27,7 +28,7 @@ export function writeConfig(gen: Generator) {
 		data = IDEConfig;
 	}
 
-	writeFile(`${file}`, JSON.stringify(data), (error) => {
+	writeFile(`${file}`, JSON.stringify(data, null, 4), (error) => {
 		if (error) {
 			terminal(`An Error occured while creating the ${name} file`, 'error');
 		}
