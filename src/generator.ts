@@ -88,7 +88,7 @@ export class Generator {
 				replacement: `${p}`
 			});
 
-			this.configPaths[`${key}/*`] = [p];
+			this.configPaths[`${key}/*`] = [slash(`${p}/*`)];
 		});
 	}
 
@@ -107,7 +107,7 @@ export class Generator {
 				this.aliases = this.aliases.filter((a) => a.replacement != p);
 
 				Object.keys(this.configPaths).find((cp) => {
-					if(this.configPaths[cp][0] === p) {
+					if(this.configPaths[cp][0] === slash(`${p}/*`)) {
 						delete this.configPaths[cp];
 					}
 				})
