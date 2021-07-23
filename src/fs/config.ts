@@ -3,6 +3,7 @@ import { slash, terminal } from '../utils';
 
 import type { Generator } from '../generator';
 import { IDEConfig } from '../constants';
+import { parse } from 'jsonc-parser';
 
 /**
  * Creates a JS or TS Configfile
@@ -18,17 +19,24 @@ export function writeConfig(gen: Generator) {
 	const name = useTypescript ? 'tsconfig' : 'jsconfig';
 	const file = slash(`${root}/${name}.json`);
 
-	let data;
+	let json;
 
-	if (existsSync(file)) {
-		data = JSON.parse(readFileSync(`${file}`).toString());
-		data.compilerOptions.paths = { ...data.compilerOptions.paths, ...gen.configPaths };
+	if(existsSync(file)) {
+		json = parse(readFileSync(`${file}`).toString());
+		if(json.compilerOptions) {
+			const paths = json.compilerOptions.paths || {};
+			json.compilerOptions.paths = { ...paths, ...gen.configPaths };
+		} else {
+			json.compilerOptions = {
+				paths: {...gen.configPaths }
+			}
+		}
 	} else {
 		IDEConfig.compilerOptions.paths = { ...gen.configPaths };
-		data = IDEConfig;
+		json = Object.assign({}, IDEConfig);
 	}
 
-	writeFile(`${file}`, JSON.stringify(data, null, 4), (error) => {
+	writeFile(`${file}`, JSON.stringify(json, null, 4), (error) => {
 		if (error) {
 			terminal(`An Error occured while creating the ${name} file`, 'error');
 		}

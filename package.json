@@ -41,6 +41,7 @@
     "dependencies": {
         "chalk": "^4.1.1",
         "chokidar": "^3.5.1",
+        "jsonc-parser": "^3.0.0",
         "vite": "^2.2.4"
     }
 }
