@@ -33,15 +33,15 @@
         "prepublishOnly": "npm run build"
     },
     "devDependencies": {
-        "@types/node": "^15.0.1",
-        "fast-glob": "^3.2.5",
-        "tsup": "^4.10.1",
-        "typescript": "^4.2.4"
+        "@types/node": "^16.4.1",
+        "fast-glob": "^3.2.7",
+        "tsup": "^4.12.5",
+        "typescript": "^4.3.5"
     },
     "dependencies": {
         "chalk": "^4.1.1",
-        "chokidar": "^3.5.1",
+        "chokidar": "^3.5.2",
         "jsonc-parser": "^3.0.0",
-        "vite": "^2.2.4"
+        "vite": "^2.4.3"
     }
 }
