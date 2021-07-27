@@ -128,12 +128,11 @@ export class Generator {
 			return;
 		}
 
+		getDirectories(this);
+
 		if (this.options.allowGlobalAlias) {
 			this.addAlias(this.fullPath);
 		}
-
-		getDirectories(this);
-		this.searched = true;
 
 		if (this.options.allowLogging) {
 			writeLog(this);
@@ -142,5 +141,7 @@ export class Generator {
 		if (this.options.useConfig) {
 			writeConfig(this);
 		}
+
+		this.searched = true;
 	}
 }
