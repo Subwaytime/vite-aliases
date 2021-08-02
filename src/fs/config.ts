@@ -21,9 +21,9 @@ export function writeConfig(gen: Generator) {
 	let json;
 
 	if(existsSync(file)) {
-		file = readFileSync(`${file}`).toString();
+		const data = readFileSync(`${file}`).toString();
 		let errors: any[] = [];
-		json = parse(file, errors, { disallowComments: true });
+		json = parse(data, errors, { disallowComments: true });
 
 		if(!empty(errors)) {
 			throw new Error(
