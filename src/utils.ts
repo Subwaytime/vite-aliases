@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { MODULE_NAME } from './constants';
+import chalk from 'chalk';
 
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
@@ -41,6 +41,24 @@ export function toArray<T>(value: T | T[]): T[] {
 
 export function toCamelCase(string: string) {
 	return string.trim().replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''));
+}
+
+/**
+ * Check if Value is Empty
+ * supports: Array, Object, String
+ * @param value
+ */
+
+export function empty(value: any) {
+	if (value === null || value === undefined || value === '{}' || value === '') {
+		return true;
+	}
+
+	if (Array.isArray(value) && Object.keys(value).length <= 0) {
+		return true;
+	}
+
+	return false;
 }
 
 /**
