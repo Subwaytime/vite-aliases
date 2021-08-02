@@ -14,6 +14,7 @@ export const config: Required<Options> = {
 	adjustDuplicates: false,
 
 	useConfig: false,
+	useRelativePaths: false,
 	useTypescript: false,
 
 	root: process.cwd(),

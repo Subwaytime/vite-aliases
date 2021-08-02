@@ -47,11 +47,18 @@ export interface Options {
 
 	/**
 	 * Generates Paths in IDE Config File
-	 * Works with JS oder TS
+	 * Works with JS or TS
 	 * For Typescript: set `useTypescript` true
 	 * @default false
 	 */
 	useConfig: boolean;
+
+	/**
+	 * Used Paths in JS/TS Configs will now be relative to baseUrl
+	 * @default false
+	 */
+
+	useRelativePaths: boolean;
 
 	/**
 	 * Will generate Paths in tsconfig
