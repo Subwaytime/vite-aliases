@@ -6,7 +6,7 @@ import chalk from 'chalk';
  * @param string
  */
 
-export function slash(string: string) {
+export function slash(string: string): string {
 	return string.replace(/\\/g, '/');
 }
 
@@ -16,7 +16,7 @@ export function slash(string: string) {
  * @param seperator
  */
 
-export function split(string: string, seperator: string) {
+export function split(string: string, seperator: string): string[] {
 	return string.split(seperator);
 }
 
@@ -35,11 +35,23 @@ export function toArray<T>(value: T | T[]): T[] {
 }
 
 /**
+ * Turns a Value into Array
+ * @param string
+ * @param seperator
+ */
+
+export function toRelative(path: string, dir: string): string {
+	let folders = split(slash(path), '/');
+	folders = folders.slice(folders.findIndex((f) => f === dir), folders.length);
+	return slash(`./${folders.join('/')}/*`);
+}
+
+/**
  * Turns any String into Camelcased String
  * @param string
  */
 
-export function toCamelCase(string: string) {
+export function toCamelCase(string: string): string {
 	return string.trim().replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''));
 }
 
