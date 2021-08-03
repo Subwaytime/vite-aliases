@@ -1,5 +1,5 @@
-import type { Alias, ConfigPath, Options } from './types';
-import { slash, split, terminal, toArray, toCamelCase } from './utils';
+import type { Alias, Options, Path } from './types';
+import { slash, split, terminal, toArray, toCamelCase, toRelative } from './utils';
 
 import chokidar from 'chokidar';
 import { config } from './constants';
@@ -21,7 +21,7 @@ export class Generator {
 
 	public aliases: Alias[] = [];
 	public directories = new Set<string>();
-	public configPaths: ConfigPath = {};
+	public paths: Path = {};
 
 	constructor(public readonly servermode: String, options?: Partial<Options>) {
 		this.options = Object.assign({}, config, options);
@@ -81,6 +81,10 @@ export class Generator {
 				}
 			}
 
+			if (lastDir === this.options.dir && this.options.allowGlobalAlias) {
+				key = `${this.options.prefix}`;
+			}
+
 			this.directories.add(p);
 
 			this.aliases.push({
@@ -88,7 +92,7 @@ export class Generator {
 				replacement: `${p}`
 			});
 
-			this.configPaths[`${key}/*`] = [slash(`${p}/*`)];
+			this.handleConfigPath(p, `${key}/*`);
 		});
 	}
 
@@ -106,13 +110,25 @@ export class Generator {
 
 				this.aliases = this.aliases.filter((a) => a.replacement != p);
 
-				Object.keys(this.configPaths).find((cp) => {
-					if(this.configPaths[cp][0] === slash(`${p}/*`)) {
-						delete this.configPaths[cp];
-					}
-				})
+				this.handleConfigPath(p);
 			}
 		});
+	}
+
+	/**
+	 *
+	 * @param path
+	 * @param key
+	 */
+
+	handleConfigPath(path: string, key ?:string) {
+		const p = this.options.useRelativePaths ? toRelative(path, this.options.dir) : slash(`${path}/*`);
+
+		if(key) {
+			this.paths[key] = [p];
+		} else {
+			this.paths = Object.fromEntries(Object.entries(this.paths).filter((cp) => cp[1][0] === p));
+		}
 	}
 
 	/**
