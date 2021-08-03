@@ -141,6 +141,12 @@ ViteAliases({
 	useConfig: false,
 
 	/**
+	 * Used Paths in JS/TS Configs will now be relative to baseUrl
+	 */
+
+	useRelativePaths: false;
+
+	/**
 	 * Will generate Paths in tsconfig
 	 * Used in Combination with `useConfig`
 	 */
