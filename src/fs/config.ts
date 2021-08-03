@@ -1,9 +1,9 @@
-import { createScanner, parse } from 'jsonc-parser';
 import { empty, slash, terminal } from '../utils';
 import { existsSync, readFileSync, writeFile } from 'fs';
 
 import type { Generator } from '../generator';
 import { IDEConfig } from '../constants';
+import { parse } from 'jsonc-parser';
 
 /**
  * Creates a JS or TS Configfile
@@ -17,7 +17,7 @@ export function writeConfig(gen: Generator) {
 	}
 
 	const name = useTypescript ? 'tsconfig' : 'jsconfig';
-	let file = slash(`${root}/${name}.json`);
+	const file = slash(`${root}/${name}.json`);
 	let json;
 
 	if(existsSync(file)) {
@@ -34,14 +34,14 @@ export function writeConfig(gen: Generator) {
 
 		if(json.compilerOptions) {
 			const paths = json.compilerOptions.paths || {};
-			json.compilerOptions.paths = { ...paths, ...gen.configPaths };
+			json.compilerOptions.paths = { ...paths, ...gen.paths };
 		} else {
 			json.compilerOptions = {
-				paths: {...gen.configPaths }
-			}
+				paths: { ...gen.paths },
+			};
 		}
 	} else {
-		IDEConfig.compilerOptions.paths = { ...gen.configPaths };
+		IDEConfig.compilerOptions.paths = { ...gen.paths };
 		json = Object.assign({}, IDEConfig);
 	}
 
