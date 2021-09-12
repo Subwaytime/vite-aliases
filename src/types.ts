@@ -68,6 +68,13 @@ export interface Options {
 	useTypescript: boolean;
 
 	/**
+	 * Will generate paths in tsconfig for re-exporting modules from an index.ts file
+	 * Used in combination with `useConfig` and `useTypeScript`
+	 * @default false
+	 */
+	 addReExportPaths: boolean;
+
+	/**
 	 * Root path of Vite project
 	 * @default 'process.cwd()'
 	 */

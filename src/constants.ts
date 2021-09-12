@@ -16,6 +16,7 @@ export const config: Required<Options> = {
 	useConfig: false,
 	useRelativePaths: false,
 	useTypescript: false,
+	addReExportPaths: false,
 
 	root: process.cwd(),
 };

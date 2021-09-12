@@ -153,6 +153,12 @@ ViteAliases({
 	useTypescript: false,
 
 	/**
+	 * Will generate paths in tsconfig for re-exporting modules from an index.ts file
+	 * Used in combination with `useConfig` and `useTypeScript`
+	 */
+	addReExportPaths: false,
+
+	/**
 	 * Root path of Vite project
 	 */
 	root: process.cwd()

@@ -8,7 +8,8 @@ const config = {
 			useConfig: true,
 			useTypescript: true,
 			allowLogging: true,
-			adjustDuplicates: true
+			adjustDuplicates: true,
+			addReExportPaths: false
 		}),
 	],
 	server: {

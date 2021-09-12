@@ -43,7 +43,7 @@ export function toArray<T>(value: T | T[]): T[] {
 export function toRelative(path: string, dir: string): string {
 	let folders = split(slash(path), '/');
 	folders = folders.slice(folders.findIndex((f) => f === dir), folders.length);
-	return slash(`./${folders.join('/')}/*`);
+	return slash(`./${folders.join('/')}`);
 }
 
 /**
