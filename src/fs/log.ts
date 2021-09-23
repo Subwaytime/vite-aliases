@@ -1,5 +1,5 @@
+import { logger, slash } from '../utils';
 import { mkdir, writeFile } from 'fs';
-import { slash, terminal } from '../utils';
 
 import type { Generator } from '../generator';
 import { MODULE_NAME } from '../constants';
@@ -23,15 +23,15 @@ export function writeLog(gen: Generator) {
 	mkdir(`${folder}`, { recursive: true }, (error) => {
 		writeFile(`${file}`, JSON.stringify(data, null, 4), (error) => {
 			if (error) {
-				terminal('An Error occured while creating the log File!', 'warning');
+				throw logger.error(new Error('An Error occured while creating the log File!'));
 			}
 		});
 
 		if (error) {
-			terminal('An Error occured while creating the logfolder.', 'warning');
+			throw logger.error(new Error('An Error occured while creating the logfolder.'));
 		}
 	});
 
-	terminal('Logfile successfully created!');
+	logger.success('log successfully created!');
 	return;
 }

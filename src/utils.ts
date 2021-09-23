@@ -1,5 +1,5 @@
 import { MODULE_NAME } from './constants';
-import chalk from 'chalk';
+import consola from 'consola';
 
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
@@ -74,17 +74,7 @@ export function empty(value: any) {
 }
 
 /**
- * Simple Info/Warn/Error Function
- * @param string
- * @param color
+ * Simple Info/Warn/Error Consola Instance
  */
 
-export function terminal(string: string, type: string = 'info') {
-	const types: { [index: string]: any } = {
-		info: chalk.hex('#228be6'),
-		warning: chalk.hex('#fab005'),
-		error: chalk.hex('#e03131'),
-	};
-
-	return console.log(types[type](`[${MODULE_NAME}]: ${string}`));
-}
+export const logger = consola.create({});

@@ -1,4 +1,4 @@
-import { empty, slash, terminal } from '../utils';
+import { empty, logger, slash } from '../utils';
 import { existsSync, readFileSync, writeFile } from 'fs';
 
 import type { Generator } from '../generator';
@@ -26,10 +26,9 @@ export function writeConfig(gen: Generator) {
 		json = parse(data, errors, { disallowComments: true });
 
 		if(!empty(errors)) {
-			throw new Error(
-				`Can't read JSON Config File, if it contains Comments please remove them.
-				For more Information: https://github.com/Subwaytime/vite-aliases/issues/25`,
-			);
+			throw logger.error(new Error(
+				`Can't read JSON Config File, if it contains Comments please remove them.For more Information: https://github.com/Subwaytime/vite-aliases/issues/25`
+			));
 		}
 
 		if(json.compilerOptions) {
@@ -47,10 +46,10 @@ export function writeConfig(gen: Generator) {
 
 	writeFile(`${file}`, JSON.stringify(json, null, 4), (error) => {
 		if (error) {
-			terminal(`An Error occured while creating the ${name} file`, 'error');
+			throw logger.error(new Error(`An Error occured while creating the ${name} file`));
 		}
 	});
 
-	terminal(`${name} file successfully created!`);
+	logger.success(`${name} file successfully created!`);
 	return;
 }

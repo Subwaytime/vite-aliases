@@ -1,5 +1,5 @@
 import type { Alias, Options, Path } from './types';
-import { slash, split, terminal, toArray, toCamelCase, toRelative } from './utils';
+import { logger, slash, split, toArray, toCamelCase, toRelative } from './utils';
 
 import chokidar from 'chokidar';
 import { config } from './constants';
@@ -69,11 +69,11 @@ export class Generator {
 					}
 				});
 
-				terminal(`Path: '${p}' contains multiple folders with same name: ${duplicates.toString()}`, 'warning');
+				logger.warn(`Path: '${p}' contains multiple folders with same name: ${duplicates.toString()}`);
 			}
 
 			if(this.aliases.some(a => a.find === key)) {
-				terminal('There are duplicate Aliases generated, either fix the folderstructure or enable adjustDuplicates', 'warning');
+				logger.warn('There are duplicate Aliases generated, either fix the folderstructure or enable adjustDuplicates');
 
 				if(this.options.adjustDuplicates && this.options.depth > 1) {
 					const name = folders.filter(f => !split(slash(this.options.dir), '/').includes(f)).join('-');

@@ -1,6 +1,6 @@
 import type { Generator } from '../generator';
 import fg from 'fast-glob';
-import { terminal } from '../utils';
+import { logger } from '../utils';
 
 /**
  * Return all folders from the project directory
@@ -19,7 +19,7 @@ export function getDirectories(gen: Generator) {
 	});
 
 	if (!directories.length) {
-		terminal('No Directories could be found!', 'error');
+		logger.error(new Error('No Directories could be found!'));
 	}
 
 	gen.addAlias(directories);
