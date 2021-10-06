@@ -15,6 +15,7 @@ export const config: Required<Options> = {
 
 	useConfig: false,
 	useRelativePaths: false,
+	useIndexPaths: false,
 	useTypescript: false,
 
 	root: process.cwd(),

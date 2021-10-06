@@ -92,7 +92,7 @@ export class Generator {
 				replacement: `${p}`
 			});
 
-			this.handleConfigPath(p, `${key}/*`);
+			this.handleConfigPath(p, key);
 		});
 	}
 
@@ -122,10 +122,15 @@ export class Generator {
 	 */
 
 	handleConfigPath(path: string, key ?:string) {
-		const p = this.options.useRelativePaths ? toRelative(path, this.options.dir) : slash(`${path}/*`);
+		const p = this.options.useRelativePaths ? toRelative(path, this.options.dir) : slash(path);
 
 		if(key) {
-			this.paths[key] = [p];
+			this.paths[`${key}/*`] = [`${p}/*`];
+
+			if(this.options.useIndexPaths) {
+				this.paths[key] = [p];
+			}
+
 		} else {
 			this.paths = Object.fromEntries(Object.entries(this.paths).filter((cp) => cp[1][0] === p));
 		}

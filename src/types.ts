@@ -61,6 +61,14 @@ export interface Options {
 	useRelativePaths: boolean;
 
 	/**
+	 * Adds seperate Index Paths
+	 * approach created by @davidohlin
+	 * WARNING: This is just a quick fix and will get changed with 0.9.0!
+	 */
+
+	useIndexPaths: boolean;
+
+	/**
 	 * Will generate Paths in tsconfig
 	 * Used in Combination with `useConfig`
 	 * @default false
