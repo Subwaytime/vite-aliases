@@ -20,9 +20,9 @@
         "build": "vite build"
     },
     "dependencies": {
-        "@vitejs/plugin-vue": "^1.9.0",
-        "@vue/compiler-sfc": "^3.2.13",
-        "vite": "^2.5.10",
-        "vue": "^3.2.13"
+        "@vitejs/plugin-vue": "^2.0.1",
+        "@vue/compiler-sfc": "^3.2.26",
+        "vite": "^2.7.10",
+        "vue": "^3.2.26"
     }
 }
