@@ -9,13 +9,13 @@ export const config: Required<Options> = {
 	deep: true,
 	depth: 1,
 
-	allowGlobalAlias: true,
-	allowLogging: false,
+	createGlobalAlias: true,
+	createLog: false,
 	adjustDuplicates: false,
 
+	useAbsolute: false,
 	useConfig: false,
-	useRelativePaths: false,
-	useIndexPaths: false,
+	useIndexes: false,
 	useTypescript: false,
 
 	root: process.cwd(),
