@@ -1,5 +1,8 @@
 import { MODULE_NAME } from './constants';
 import consola from 'consola';
+import fs from 'fs/promises';
+import { resolve, basename } from 'path';
+import { parse, stringify } from 'comment-json';
 
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
@@ -35,7 +38,7 @@ export function toArray<T>(value: T | T[]): T[] {
 }
 
 /**
- * Turns a Value into Array
+ * Turns a absolute Path into an Relative Path
  * @param string
  * @param seperator
  */
@@ -61,14 +64,18 @@ export function toCamelCase(string: string): string {
  * @param value
  */
 
-export function empty(value: any) {
-	if (value === null || value === undefined || value === '{}' || value === '') {
+export function isEmpty(value: any) {
+	if (value === null || value === undefined || value === '{}' || value === '' || JSON.stringify(value) === '{}') {
 		return true;
 	}
 
-	if (Array.isArray(value) && Object.keys(value).length <= 0) {
+	if (Array.isArray(value) && Object.keys(value).length <= 0 || Array.isArray(value) && value.length === 0) {
 		return true;
 	}
+
+	// if (Reflect.ownKeys(value).length === 0 && value.constructor === Object) {
+	// 	return true;
+	// }
 
 	return false;
 }
@@ -78,3 +85,36 @@ export function empty(value: any) {
  */
 
 export const logger = consola.create({});
+export function abort(message: any) {
+	throw logger.error(new Error(message));
+}
+
+/**
+ * Reads a JSON File
+ */
+
+export async function readJSON(path: string) {
+	try {
+		const file = (await fs.readFile(path, 'utf-8')).toString();
+		logger.success('Config successfully read!');
+		return parse(file);
+	} catch(error) {
+		abort(error);
+	}
+};
+
+/**
+ * Writes a JSON File
+ */
+
+export async function writeJSON(path: string, data: any, update?: boolean) {
+	const name = basename(path);
+	const state = update ? 'updated': 'created';
+	try {
+		await fs.writeFile(path, stringify(data, null, 4));
+		logger.success(`File: ${name} successfully ${state}`);
+	} catch(error) {
+		logger.error(`File: ${name} could not be ${state}.`);
+		abort(error);
+	}
+}
