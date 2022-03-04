@@ -3,74 +3,71 @@
  */
 export interface Options {
 	/**
-	 * Relative path to the project Directory
+	 * Relative path to the project directory
 	 * @default 'src'
 	 */
 	dir: string;
 
 	/**
-	 * Prefix Symbol for the Aliases
+	 * Prefix symbol for the aliases
 	 * @default '@'
 	 */
 	prefix: string;
 
 	/**
-	 * Allow Searching for Subdirectories
+	 * Allow searching for subdirectories
 	 * @default true
 	 */
 	deep: boolean;
 
 	/**
-	 * Search Depthlevel for Subdirectories
+	 * Search depthlevel for subdirectories
 	 * @default 1
 	 */
 	depth: number;
 
 	/**
-	 * Creates a Logfile in `logs` Folder
-	 * Will be relative to project Directory
+	 * Creates a Logfile in `logs` folder
+	 * will be relative to project Directory
 	 * @default false
 	 */
-	allowLogging: boolean;
+	createLog: boolean;
 
 	/**
-	 * Allow global project Directory alias
+	 * Create global project directory alias
 	 * @default true
 	 */
-	allowGlobalAlias: boolean;
+	createGlobalAlias: boolean;
 
 	/**
-	 * Turns Duplicates into camelCased Path Aliases
+	 * Turns duplicates into camelCased path aliases
 	 * @default false
 	 */
 	adjustDuplicates: boolean;
 
 	/**
-	 * Generates Paths in IDE Config File
-	 * Works with JS or TS
-	 * For Typescript: set `useTypescript` true
+	 * Used paths in JS/TS configs will now be relative to baseUrl
+	 * @default false
+	 */
+	useAbsolute: boolean;
+
+	/**
+	 * Adds seperate index paths
+	 * @default false
+	 */
+	useIndexes: boolean;
+
+	/**
+	 * Generates paths in IDE config file
+	 * works with JS or TS
+	 * for Typescript: set `useTypescript` true
 	 * @default false
 	 */
 	useConfig: boolean;
 
 	/**
-	 * Used Paths in JS/TS Configs will now be relative to baseUrl
-	 * @default false
-	 */
-
-	useRelativePaths: boolean;
-
-	/**
-	 * Adds seperate Index Paths
-	 * approach created by @davidohlin
-	 * WARNING: This is just a quick fix and will get changed with 0.9.0!
-	 */
-
-	useIndexPaths: boolean;
-
-	/**
 	 * Will generate Paths in tsconfig
-	 * Used in Combination with `useConfig`
+	 * used in combination with `useConfig`
 	 * @default false
 	 */
 	useTypescript: boolean;
@@ -87,6 +84,6 @@ export interface Alias {
 	replacement: string
 };
 
-export type Path = {
+export interface Path {
 	[key: string]: string[]
 };
