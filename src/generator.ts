@@ -1,12 +1,10 @@
 import type { Alias, Options, Path } from './types';
+import { getDirectories, writeConfig, writeLog } from './fs';
 import { logger, slash, split, toArray, toCamelCase, toRelative } from './utils';
 
 import chokidar from 'chokidar';
 import { config } from './constants';
-import { getDirectories } from './fs/glob';
 import { resolve } from 'path';
-import { writeConfig } from './fs/config';
-import { writeLog } from './fs/log';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -23,28 +21,14 @@ export class Generator {
 	public directories = new Set<string>();
 	public paths: Path = {};
 
-	constructor(public readonly servermode: String, options?: Partial<Options>) {
+	constructor(public readonly servermode: string, options?: Partial<Options>) {
 		this.options = Object.assign({}, config, options);
 
-		const {
-			dir,
-			depth,
-			root,
-		}: Options = this.options;
-
-		this.fullPath = slash(resolve(root, dir)); // needed for absolute paths in watcher
+		this.fullPath = slash(resolve(this.options.root, this.options.dir)); // needed for absolute paths in watcher
 
 		// only watch on dev not on build
 		if (servermode === 'serve') {
-			// watch for directory changes
-			const watcher = chokidar.watch(this.fullPath, { ignoreInitial: true, depth: depth });
-
-			watcher.on('addDir', (path) => {
-				this.addAlias(path);
-			})
-			.on('unlinkDir', (path) => {
-				this.removeAlias(path);
-			});
+			this.observe();
 		}
 	}
 
@@ -81,7 +65,7 @@ export class Generator {
 				}
 			}
 
-			if (lastDir === this.options.dir && this.options.allowGlobalAlias) {
+			if (lastDir === this.options.dir && this.options.createGlobalAlias) {
 				key = `${this.options.prefix}`;
 			}
 
@@ -122,47 +106,69 @@ export class Generator {
 	 */
 
 	handleConfigPath(path: string, key ?:string) {
-		const p = this.options.useRelativePaths ? toRelative(path, this.options.dir) : slash(path);
+		const p = this.options.useAbsolute ? slash(path): toRelative(path, this.options.dir);
 
 		if(key) {
 			this.paths[`${key}/*`] = [`${p}/*`];
 
-			if(this.options.useIndexPaths) {
+			if(this.options.useIndexes) {
 				this.paths[key] = [p];
 			}
 
 		} else {
-			this.paths = Object.fromEntries(Object.entries(this.paths).filter((cp) => cp[1][0] === p));
+			// TODO: add useIndexes removal
+			this.paths = Object.fromEntries(Object.entries(this.paths).filter((cp) => cp[1][0].slice(0, -2) != p));
 		}
 	}
 
 	/**
-	 * Glob Directories
+	 * Glob directories
 	 * writes Logfile
 	 * writes IDE Config
 	 */
 
 	private searched: boolean = false;
 
-	glob() {
-		if(this.searched) {
+	async init() {
+		if (this.searched) {
 			return;
 		}
 
-		getDirectories(this);
+		await getDirectories(this);
 
-		if (this.options.allowGlobalAlias) {
+		// add global alias if allowed
+		if (this.options.createGlobalAlias) {
 			this.addAlias(this.fullPath);
 		}
 
-		if (this.options.allowLogging) {
-			writeLog(this);
-		}
+		// start alias logger if allowed
+		writeLog(this);
 
-		if (this.options.useConfig) {
-			writeConfig(this);
-		}
+		// write js/ts config if allowed
+		writeConfig(this);
 
 		this.searched = true;
+	}
+
+	/**
+	 * Watch for directory changes
+	 */
+
+	observe() {
+		const watcher = chokidar.watch(this.fullPath, { ignoreInitial: true, depth: this.options.depth });
+
+		watcher
+			.on('addDir', (path) => {
+				this.addAlias(path);
+				writeLog(this, 'add');
+				writeConfig(this, 'add');
+				logger.info(`Watcher added new Path: ${path}`);
+			})
+			.on('unlinkDir', (path) => {
+				this.removeAlias(path);
+				writeLog(this, 'remove');
+				writeConfig(this, 'remove');
+				logger.info(`Watcher removed Path: ${path}`);
+			});
 	}
 }
