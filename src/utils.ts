@@ -3,6 +3,7 @@ import consola from 'consola';
 import fs from 'fs/promises';
 import { resolve, basename } from 'path';
 import { parse, stringify } from 'comment-json';
+import type { Process } from './types';
 
 /**
  * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
@@ -107,9 +108,10 @@ export async function readJSON(path: string) {
  * Writes a JSON File
  */
 
-export async function writeJSON(path: string, data: any, update?: boolean) {
+export async function writeJSON(path: string, data: any, process: Process) {
 	const name = basename(path);
-	const state = update ? 'updated': 'created';
+	const state = (process === 'add' || process === 'normal') ? 'created' : 'updated';
+
 	try {
 		await fs.writeFile(path, stringify(data, null, 4));
 		logger.success(`File: ${name} successfully ${state}`);
