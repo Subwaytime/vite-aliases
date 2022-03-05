@@ -1,18 +1,19 @@
-import { logger, slash } from '../utils';
-import { mkdir, writeFile } from 'fs';
+import { abort, slash, writeJSON } from '../utils';
+import { mkdir } from 'fs/promises';
 
 import type { Generator } from '../generator';
 import { MODULE_NAME } from '../constants';
+import type { Process } from '../types';
 
 /**
  * Creates a Logfile
  * If needed it will also create a Logfolder
  */
 
-export function writeLog(gen: Generator) {
-	const { dir, allowLogging } = gen.options;
+export async function writeLog(gen: Generator, process: Process = 'normal') {
+	const { dir, createLog } = gen.options;
 
-	if (!allowLogging) {
+	if (!createLog) {
 		return;
 	}
 
@@ -20,18 +21,12 @@ export function writeLog(gen: Generator) {
 	const file = slash(`${folder}/${MODULE_NAME}.json`);
 	const data = gen.aliases;
 
-	mkdir(`${folder}`, { recursive: true }, (error) => {
-		writeFile(`${file}`, JSON.stringify(data, null, 4), (error) => {
-			if (error) {
-				throw logger.error(new Error('An Error occured while creating the log File!'));
-			}
-		});
-
-		if (error) {
-			throw logger.error(new Error('An Error occured while creating the logfolder.'));
+	try {
+		if(process != 'normal') {
+			await mkdir(folder, { recursive: true });
 		}
-	});
-
-	logger.success('log successfully created!');
-	return;
+		await writeJSON(file, data, process);
+	} catch(error) {
+		abort(`Cannot create Logfolder ${folder}.`);
+	}
 }
