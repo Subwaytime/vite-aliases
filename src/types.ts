@@ -87,3 +87,5 @@ export interface Alias {
 export interface Path {
 	[key: string]: string[]
 };
+
+export type Process = 'add' | 'remove' | 'normal';
