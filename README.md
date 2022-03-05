@@ -1,6 +1,6 @@
 <h2 align="left">vite-aliases</h2>
 
-<p align="left">Alias auto generation for Vite 2</p>
+<p align="left">Alias auto generation for Vite</p>
 
 <p align="left">
 <a href="https://www.npmjs.com/package/vite-aliases">
@@ -33,9 +33,9 @@ That's it!
 
 Based on your Folderstructure, it will now automatically generate all needed aliases.
 You can configure it to any desired Folderdepth, but it is recommend to stay on the first Level!
-Furthermore it will use your native OS Filesystem, so it works on Linux, Mac, Windows and other OS.
+Furthermore it will use your native OS filesystem, so it works on Linux, Mac, Windows and other OS.
 
-This Structure:
+This structure:
 
 ```
 src
@@ -79,8 +79,8 @@ will generate the following:
 
 ## Best Practice
 
-`vite-aliases` is meant to simply take the first Layer of your Projectfolders and turn it into useful Shortcuts.
-Therefore i advise you to use the default Configuration and do not use Folders with the same name, otherwise it will create an Error.
+`vite-aliases` is meant to simply take the first Layer of your folders and turn it into useful Shortcuts.
+Therefore i advise you to use the default Configuration and do not use folders with the same name, otherwise it will create an Error.
 
 If however you need duplicate Foldernames, enable `adjustDuplicates`.
 This will turn the entire Filepath of said Duplicate into the alias itself, like shown in the Example below.
@@ -93,62 +93,67 @@ and so on..
 
 ## Configuration
 
-Current available Options:
+Current available options:
 
 ```ts
 ViteAliases({
 	/**
-	 * Relative path to the project Directory
+	 * Relative path to the project directory
 	 */
 	dir: 'src',
 
 	/**
-	 * Prefix Symbol for the Aliases
+	 * Prefix symbol for the aliases
 	 */
 	prefix: '@',
 
 	/**
-	 * Allow Searching for Subdirectories
+	 * Allow searching for subdirectories
 	 */
 	deep: true,
 
 	/**
-	 * Search Depthlevel for Subdirectories
+	 * Search depthlevel for subdirectories
 	 */
 	depth: 1,
 
 	/**
-	 * Creates a Logfile in `logs` Folder
-	 * Will be relative to project Directory
+	 * Creates a Logfile in `logs` folder
+	 * will be relative to project directory
 	 */
-	allowLogging: false,
+	createLog: false,
 
 	/**
-	 * Allow global project Directory alias
+	 * Create global project directory alias
 	 */
-	allowGlobalAlias: true,
+	createGlobalAlias: true,
 
 	/**
-	 * Turns Duplicates into camelCased Path Aliases
+	 * Turns duplicates into camelCased path aliases
 	 */
 	adjustDuplicates: false,
 
 	/**
-	 * Generates Paths in IDE Config File
-	 * Works with JS oder TS
-	 * For Typescript: set `useTypescript` true
+	 * Used paths in JS/TS configs will now be relative to baseUrl
+	 */
+	useAbsolute: false,
+
+	/**
+	 * Adds seperate index paths
+	 * approach created by @davidohlin
+	 */
+	useIndexes: false,
+
+	/**
+	 * Generates paths in IDE config file
+	 * works with JS or TS
+	 * for Typescript: set `useTypescript` true
 	 */
 	useConfig: false,
 
 	/**
-	 * Used Paths in JS/TS Configs will now be relative to baseUrl
-	 */
-
-	useRelativePaths: false,
-
-	/**
 	 * Will generate Paths in tsconfig
-	 * Used in Combination with `useConfig`
+	 * used in combination with `useConfig`
 	 */
 	useTypescript: false,
 
@@ -162,7 +167,7 @@ ViteAliases({
 ## Thanks
 
 Thanks to [@brattonross](https://github.com/brattonross) and [@antfu](https://github.com/antfu),
-due to this tiny Library beeing inspired by both Projects:
+due to this tiny library beeing inspired by both projects:
 
 [vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
 
