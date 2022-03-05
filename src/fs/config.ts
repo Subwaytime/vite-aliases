@@ -1,16 +1,16 @@
-import { empty, logger, slash } from '../utils';
-import { existsSync, readFileSync, writeFile } from 'fs';
+import { existsSync } from 'fs';
+import { abort, logger, readJSON, slash, writeJSON } from '../utils';
 
 import type { Generator } from '../generator';
 import { IDEConfig } from '../constants';
-import { parse } from 'jsonc-parser';
+import type { Process } from '../types';
 
 /**
  * Creates a JS or TS Configfile
  */
 
-export function writeConfig(gen: Generator) {
-	const { root, useTypescript, useConfig } = gen.options;
+export async function writeConfig(gen: Generator, process: Process = 'normal') {
+	const { root, dir, useTypescript, useConfig } = gen.options;
 
 	if (!useConfig) {
 		return;
@@ -18,38 +18,41 @@ export function writeConfig(gen: Generator) {
 
 	const name = useTypescript ? 'tsconfig' : 'jsconfig';
 	const file = slash(`${root}/${name}.json`);
-	let json;
 
-	if(existsSync(file)) {
-		const data = readFileSync(`${file}`).toString();
-		let errors: any[] = [];
-		json = parse(data, errors, { disallowComments: true });
+	try {
+		let json;
+		if (existsSync(file)) {
+			json = await readJSON(file);
 
-		if(!empty(errors)) {
-			throw logger.error(new Error(
-				`Can't read JSON Config File, if it contains Comments please remove them.For more Information: https://github.com/Subwaytime/vite-aliases/issues/25`
-			));
-		}
+			if (json.compilerOptions) {
+				let paths = json.compilerOptions.paths || {};
 
-		if(json.compilerOptions) {
-			const paths = json.compilerOptions.paths || {};
-			json.compilerOptions.paths = { ...paths, ...gen.paths };
+				if (process === 'remove') {
+					// TODO: more testcases?
+					// get filtered paths but leave paths that are not linked to project dir
+					paths = Object.fromEntries(Object.entries(paths).filter((p: any) => {
+						if(Object.values(gen.paths).flat().includes(p[1][0]) && p[1][0].includes(dir)) {
+							return p;
+						} else if(!p[1][0].includes(dir)) {
+							return p;
+						}
+					}));
+
+					json.compilerOptions.paths = {...paths, ...gen.paths };
+				} else {
+					json.compilerOptions.paths = { ...paths, ...gen.paths };
+				}
+			} else {
+				json.compilerOptions = {
+					paths: { ...gen.paths },
+				};
+			}
 		} else {
-			json.compilerOptions = {
-				paths: { ...gen.paths },
-			};
+			IDEConfig.compilerOptions.paths = { ...gen.paths };
+			json = Object.assign({}, IDEConfig);
 		}
-	} else {
-		IDEConfig.compilerOptions.paths = { ...gen.paths };
-		json = Object.assign({}, IDEConfig);
+		await writeJSON(file, json, process);
+	} catch (error) {
+		abort(`Cannot write Config: ${file}.`);
 	}
-
-	writeFile(`${file}`, JSON.stringify(json, null, 4), (error) => {
-		if (error) {
-			throw logger.error(new Error(`An Error occured while creating the ${name} file`));
-		}
-	});
-
-	logger.success(`${name} file successfully created!`);
-	return;
 }
