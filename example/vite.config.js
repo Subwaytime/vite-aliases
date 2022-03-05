@@ -1,4 +1,4 @@
-import { ViteAliases } from '../src/index';
+import { ViteAliases } from '../dist/index.js';
 import vue from '@vitejs/plugin-vue';
 
 const config = {
@@ -7,7 +7,7 @@ const config = {
 		ViteAliases({
 			useConfig: true,
 			useTypescript: true,
-			allowLogging: true,
+			createLog: true,
 			adjustDuplicates: true
 		}),
 	],

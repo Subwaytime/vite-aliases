@@ -1,5 +1,28 @@
 {
-	"compilerOptions": {
-		"paths": {}
-	}
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@logs/*": [
+                "./src/logs/*"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@/*": [
+                "./src/*"
+            ],
+            "hmm": [
+                "hmm"
+            ]
+        }
+    }
 }

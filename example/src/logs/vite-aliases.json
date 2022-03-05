@@ -1,0 +1,26 @@
+[
+    {
+        "find": "@assets",
+        "replacement": "D:/work/vite-aliases/example/src/assets"
+    },
+    {
+        "find": "@components",
+        "replacement": "D:/work/vite-aliases/example/src/components"
+    },
+    {
+        "find": "@logs",
+        "replacement": "D:/work/vite-aliases/example/src/logs"
+    },
+    {
+        "find": "@pages",
+        "replacement": "D:/work/vite-aliases/example/src/pages"
+    },
+    {
+        "find": "@utils",
+        "replacement": "D:/work/vite-aliases/example/src/utils"
+    },
+    {
+        "find": "@",
+        "replacement": "D:/work/vite-aliases/example/src"
+    }
+]
