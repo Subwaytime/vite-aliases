@@ -118,10 +118,16 @@ ViteAliases({
 	depth: 1,
 
 	/**
-	 * Creates a Logfile in `logs` folder
-	 * will be relative to project directory
+	 * Creates a Logfile
+	 * use `logPath` to change the location
 	 */
 	createLog: false,
+
+	/**
+	 * Path for Logfile
+	 */
+
+	logPath: 'src/logs',
 
 	/**
 	 * Create global project directory alias

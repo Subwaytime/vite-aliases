@@ -8,6 +8,7 @@ const config = {
 			useConfig: true,
 			useTypescript: true,
 			createLog: true,
+			logPath: './',
 			adjustDuplicates: true
 		}),
 	],

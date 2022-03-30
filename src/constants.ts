@@ -11,6 +11,7 @@ export const config: Required<Options> = {
 
 	createGlobalAlias: true,
 	createLog: false,
+	logPath: 'src/logs',
 	adjustDuplicates: false,
 
 	useAbsolute: false,

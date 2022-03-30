@@ -27,11 +27,18 @@ export interface Options {
 	depth: number;
 
 	/**
-	 * Creates a Logfile in `logs` folder
-	 * will be relative to project Directory
+	 * Creates a Logfile
+	 * use `logPath` to change the location
 	 * @default false
 	 */
 	createLog: boolean;
+
+	/**
+	 * Path for Logfile
+	 * @default 'src/logs'
+	 */
+
+	logPath: string;
 
 	/**
 	 * Create global project directory alias
