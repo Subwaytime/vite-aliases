@@ -1,7 +1,9 @@
-import { ViteAliases } from '../dist/index.js';
 import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vitest/config';
+import { ViteAliases } from '../dist/index.js';
 
-const config = {
+
+export default defineConfig({
 	plugins: [
 		vue(),
 		ViteAliases({
@@ -16,6 +18,4 @@ const config = {
 		port: 8080,
 	},
 	logLevel: 'silent',
-};
-
-export default config;
+});
