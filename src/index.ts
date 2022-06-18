@@ -1,6 +1,6 @@
+import type { Plugin } from 'vite';
 import { Generator } from './generator';
 import type { Options } from './types';
-import type { Plugin } from 'vite';
 
 export function ViteAliases(options?: Partial<Options>): Plugin {
 	let gen: Generator;
@@ -13,7 +13,7 @@ export function ViteAliases(options?: Partial<Options>): Plugin {
 			gen.init();
 
 			config.resolve = {
-				alias: gen.aliases
+				alias: config.resolve?.alias ? [...config.resolve.alias as any, ...gen.aliases] : gen.aliases
 			};
 		}
 	}
