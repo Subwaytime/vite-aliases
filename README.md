@@ -181,4 +181,4 @@ due to this tiny library beeing inspired by both projects:
 
 ## License
 
-MIT License © 2020-2021 [Leon Langer](https://github.com/subwaytime)
+MIT License © 2020-PRESENT [Leon Langer](https://github.com/subwaytime)
