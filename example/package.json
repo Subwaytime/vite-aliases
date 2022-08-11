@@ -1,26 +1,26 @@
 {
-    "name": "@vite-aliases/example",
-    "description": "Example: Alias auto generation for Vite",
-    "version": "0.1.0",
-    "private": true,
-    "license": "MIT",
-    "author": "Subwaytime <leon.l@nophase.de>",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/subwaytime/vite-aliases"
-    },
-    "homepage": "https://github.com/subwaytime/vite-aliases#readme",
-    "bugs": "https://github.com/subwaytime/vite-aliases/issues",
-    "scripts": {
-        "update:packages": "npm update --save-dev && npm update --save",
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "dependencies": {
-        "@vitejs/plugin-vue": "^2.3.3",
-        "@vue/compiler-sfc": "^3.2.37",
-        "vite": "^2.9.12",
-        "vitest": "^0.15.1",
-        "vue": "^3.2.37"
-    }
+	"name": "@vite-aliases/example",
+	"description": "Example: Alias auto generation for Vite",
+	"version": "0.1.0",
+	"private": true,
+	"license": "MIT",
+	"author": "Subwaytime <leon.l@nophase.de>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/subwaytime/vite-aliases"
+	},
+	"homepage": "https://github.com/subwaytime/vite-aliases#readme",
+	"bugs": "https://github.com/subwaytime/vite-aliases/issues",
+	"scripts": {
+		"update:packages": "npm update --save-dev && npm update --save",
+		"dev": "vite",
+		"build": "vite build"
+	},
+	"dependencies": {
+		"@vitejs/plugin-vue": "^3.0.1",
+		"@vue/compiler-sfc": "^3.2.37",
+		"vite": "^3.0.5",
+		"vitest": "^0.21.1",
+		"vue": "^3.2.37"
+	}
 }
