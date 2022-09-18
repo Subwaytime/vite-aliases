@@ -1,5 +1,5 @@
-import type { Generator } from '../generator';
 import fg from 'fast-glob';
+import type { Generator } from '../generator';
 import { logger } from '../utils';
 
 /**
@@ -7,15 +7,15 @@ import { logger } from '../utils';
  * @param options
  */
 
-export function getDirectories(gen: Generator) {
+export async function getDirectories(gen: Generator) {
 	const { dir, root, deep, depth } = gen.options;
 
-	const directories = fg.sync(deep ? `${dir}/**/*` : `${dir}/*`, {
+	const directories = await fg.sync(deep ? `${dir}/**/*` : `${dir}/*`, {
 		ignore: ['node_modules'],
 		onlyDirectories: true,
 		cwd: root,
 		deep: depth,
-		absolute: true
+		absolute: true,
 	});
 
 	if (!directories.length) {
