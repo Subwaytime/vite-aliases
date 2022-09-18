@@ -1,9 +1,3 @@
-import { getDirectories } from './glob';
-import { writeConfig } from './config';
-import { writeLog } from './log';
-
-export {
-	getDirectories,
-	writeConfig,
-	writeLog
-};
+export { writeConfig } from './config';
+export { getDirectories } from './glob';
+export { writeLog } from './log';
