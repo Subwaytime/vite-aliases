@@ -1,18 +1,9 @@
-import { MODULE_NAME } from './constants';
 import consola from 'consola';
-import fs from 'fs/promises';
-import { resolve, basename } from 'path';
-import { parse, stringify } from 'comment-json';
+import fs from 'node:fs/promises';
+import { normalizePath } from 'vite';
+import { MODULE_NAME } from './constants';
 import type { Process } from './types';
-
-/**
- * Convert Windows backslash paths to slash paths: foo\\bar ➔ foo/bar
- * @param string
- */
-
-export function slash(string: string): string {
-	return string.replace(/\\/g, '/');
-}
+import { parse, stringify } from 'comment-json';
 
 /**
  * Split String on Seperator into Array
@@ -31,7 +22,7 @@ export function split(string: string, seperator: string): string[] {
  */
 
 export function toArray<T>(value: T | T[]): T[] {
-	if(Array.isArray(value)) {
+	if (Array.isArray(value)) {
 		return value;
 	} else {
 		return [value];
@@ -45,9 +36,12 @@ export function toArray<T>(value: T | T[]): T[] {
  */
 
 export function toRelative(path: string, dir: string): string {
-	let folders = split(slash(path), '/');
-	folders = folders.slice(folders.findIndex((f) => f === dir), folders.length);
-	return slash(`./${folders.join('/')}`);
+	let folders = split(normalizePath(path), '/');
+	folders = folders.slice(
+		folders.findIndex((f) => f === dir),
+		folders.length,
+	);
+	return normalizePath(`./${folders.join('/')}`);
 }
 
 /**
@@ -70,7 +64,7 @@ export function isEmpty(value: any) {
 		return true;
 	}
 
-	if (Array.isArray(value) && Object.keys(value).length <= 0 || Array.isArray(value) && value.length === 0) {
+	if ((Array.isArray(value) && Object.keys(value).length <= 0) || (Array.isArray(value) && value.length === 0)) {
 		return true;
 	}
 
@@ -85,7 +79,7 @@ export function isEmpty(value: any) {
  * Simple Info/Warn/Error Consola Instance
  */
 
-export const logger = consola.create({});
+export const logger = consola.create({ defaults: { message: `[${MODULE_NAME}] -`} });
 export function abort(message: any) {
 	throw logger.error(new Error(message));
 }
@@ -97,25 +91,25 @@ export function abort(message: any) {
 export async function readJSON(path: string) {
 	try {
 		const file = (await fs.readFile(path, 'utf-8')).toString();
-		logger.success('Config successfully read!');
+		logger.success(`Config: ${path} successfully read!`);
 		return parse(file);
-	} catch(error) {
-		abort(error);
+	} catch (error) {
+		logger.error(`File: ${path} was not found!`);
 	}
-};
+}
 
 /**
  * Writes a JSON File
  */
 
 export async function writeJSON(path: string, data: any, process: Process) {
-	const name = basename(path);
-	const state = (process === 'add' || process === 'normal') ? 'created' : 'updated';
+	const name = path.replace(/^.*[\\\/]/, '');
+	const state = process === 'add' || process === 'default' ? 'created' : 'updated';
 
 	try {
 		await fs.writeFile(path, stringify(data, null, 4));
 		logger.success(`File: ${name} successfully ${state}`);
-	} catch(error) {
+	} catch (error) {
 		logger.error(`File: ${name} could not be ${state}.`);
 		abort(error);
 	}
