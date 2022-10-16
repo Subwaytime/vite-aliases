@@ -1,17 +1,16 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "target": "es2020",
+        "module": "es2022",
+        "target": "es2022",
         "lib": [
-            "ESNext",
-            "DOM"
+            "es2022",
         ],
+        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "strict": true,
         "strictNullChecks": true,
-        "moduleResolution": "Node",
-        "resolveJsonModule": true,
-        "skipLibCheck": true
+        "moduleResolution": "node",
+        "resolveJsonModule": true
     },
     "exclude": [
         "**/dist",

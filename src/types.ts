@@ -87,12 +87,12 @@ export interface Options {
 }
 
 export interface Alias {
-	find: string
-	replacement: string
-};
+	find: string;
+	replacement: string;
+}
 
 export interface Path {
-	[key: string]: string[]
-};
+	[key: string]: string[];
+}
 
-export type Process = 'add' | 'remove' | 'normal';
+export type Process = 'add' | 'remove' | 'default';

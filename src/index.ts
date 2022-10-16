@@ -1,8 +1,8 @@
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 import { Generator } from './generator';
 import type { Options } from './types';
 
-export function ViteAliases(options?: Partial<Options>): Plugin {
+export function ViteAliases(options: Partial<Options> = {}): PluginOption {
 	let gen: Generator;
 
 	return {
@@ -17,6 +17,4 @@ export function ViteAliases(options?: Partial<Options>): Plugin {
 			};
 		},
 	};
-}
-
-export default ViteAliases;
+};

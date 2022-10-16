@@ -8,6 +8,10 @@
 </a>
 </p>
 
+## Vite 3
+Vite 3 support is ensured starting [v0.9.5](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.5) !
+This is a pre-release, so if you find any Bugs, please report them.
+
 ## Usage
 
 Install

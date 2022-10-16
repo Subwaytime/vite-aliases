@@ -5,6 +5,7 @@
 	"private": true,
 	"license": "MIT",
 	"author": "Subwaytime <leon.l@nophase.de>",
+	"type": "module",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/subwaytime/vite-aliases"
@@ -17,10 +18,10 @@
 		"build": "vite build"
 	},
 	"dependencies": {
-		"@vitejs/plugin-vue": "^3.0.1",
-		"@vue/compiler-sfc": "^3.2.37",
-		"vite": "^3.0.5",
-		"vitest": "^0.21.1",
-		"vue": "^3.2.37"
+		"@vitejs/plugin-vue": "^3.1.0",
+		"@vue/compiler-sfc": "^3.2.39",
+		"vite": "^3.1.0",
+		"vitest": "^0.23.2",
+		"vue": "^3.2.39"
 	}
 }

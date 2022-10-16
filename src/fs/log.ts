@@ -1,10 +1,13 @@
-import { existsSync } from 'fs';
-import { mkdir } from 'fs/promises';
+import { existsSync } from 'node:fs';
+import { mkdir } from 'node:fs/promises';
+import { normalizePath } from 'vite';
 
-import { abort, slash, writeJSON } from '../utils';
-import type { Generator } from '../generator';
 import { MODULE_NAME } from '../constants';
+import type { Generator } from '../generator';
 import type { Process } from '../types';
+import { abort, writeJSON } from '../utils';
+
+
 
 /**
  * Creates a Logfile
@@ -18,16 +21,16 @@ export async function writeLog(gen: Generator, process: Process = 'normal') {
 		return;
 	}
 
-	const folder = slash(logPath);
-	const file = slash(`${folder}/${MODULE_NAME}.json`);
+	const folder = normalizePath(logPath);
+	const file = normalizePath(`${folder}/${MODULE_NAME}.json`);
 	const data = gen.aliases;
 
 	try {
-		if(!existsSync(folder)) {
+		if (!existsSync(folder)) {
 			await mkdir(folder, { recursive: true });
 		}
 		await writeJSON(file, data, process);
-	} catch(error) {
+	} catch (error) {
 		abort(`Cannot create Logfolder ${folder}.`);
 	}
 }
