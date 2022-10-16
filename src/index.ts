@@ -17,4 +17,4 @@ export function ViteAliases(options: Partial<Options> = {}): PluginOption {
 			};
 		},
 	};
-}
+};
