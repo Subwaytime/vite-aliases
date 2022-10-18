@@ -1,14 +1,16 @@
 {
 	"name": "vite-aliases",
 	"description": "Alias auto generation for Vite",
-	"version": "0.9.7",
-	"main": "./dist/index.js",
+	"version": "0.9.8",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js"
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
 		}
 	},
 	"private": false,
