@@ -8,8 +8,11 @@
 </a>
 </p>
 
+## Vite 4
+Vite 4 support is in progress! [Issue](https://github.com/Subwaytime/vite-aliases/issues/48)
+
 ## Vite 3
-Vite 3 support is ensured starting [v0.9.5](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.5) !
+Vite 3 support is ensured with version [v0.9.7](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.7) !
 This is a pre-release, so if you find any Bugs, please report them.
 
 ## Usage
@@ -31,14 +34,28 @@ export default {
 		ViteAliases()
 	]
 };
+
+```
+
+Add this to `package.json` (Plugin is only available for ESM)
+```json
+{
+	"type": "module"
+}
 ```
 
 That's it!
 
+<p>
+<br/>
 Based on your Folderstructure, it will now automatically generate all needed aliases.
-You can configure it to any desired Folderdepth, but it is recommend to stay on the first Level!
+<br />
+You can configure it to any desired Depth, but it is recommend to stay on the first Level!
+<br />
 Furthermore it will use your native OS filesystem, so it works on Linux, Mac, Windows and other OS.
+</p>
 
+<br />
 This structure:
 
 ```
@@ -84,15 +101,19 @@ will generate the following:
 ## Best Practice
 
 `vite-aliases` is meant to simply take the first Layer of your folders and turn it into useful Shortcuts.
-Therefore i advise you to use the default Configuration and do not use folders with the same name, otherwise it will create an Error.
+<br />
+Therefore i advise you to use the default Configuration and not use folders with the same name, otherwise it will create an Error.
 
 If however you need duplicate Foldernames, enable `adjustDuplicates`.
-This will turn the entire Filepath of said Duplicate into the alias itself, like shown in the Example below.
+<br />
+This will turn the entire Filepath of said duplicate into the alias itself, like shown in the Example below.
 
 Example:
+```
 `src/components` -> `@components`
 `src/pages/components` -> `@pagesComponents`
 `src/test/new/partials/components` -> `@testNewPartialsComponents`
+```
 and so on..
 
 ## Configuration
