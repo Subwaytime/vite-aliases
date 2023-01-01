@@ -9,11 +9,7 @@
 </p>
 
 ## Vite 4
-Vite 4 support is in progress! [Issue](https://github.com/Subwaytime/vite-aliases/issues/48)
-
-## Vite 3
-Vite 3 support is ensured with version [v0.9.7](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.7) !
-This is a pre-release, so if you find any Bugs, please report them.
+Vite 4 support is experimental! [#48](https://github.com/Subwaytime/vite-aliases/issues/48) [v0.9.9](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.9)
 
 ## Usage
 
