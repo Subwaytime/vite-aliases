@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "module": "es2022",
-        "target": "es2022",
+        "module": "ESNext",
+        "target": "ESNext",
         "lib": [
-            "es2022",
+            "ESNext"
         ],
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
+        "esModuleInterop": false,
         "strict": true,
         "strictNullChecks": true,
         "moduleResolution": "node",
