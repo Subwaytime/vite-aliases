@@ -3,11 +3,13 @@
 	"description": "Alias auto generation for Vite",
 	"version": "0.9.9",
 	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"module": "./dist/index.js",
 	"type": "module",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
+			"module": "./dist/index.js",
 			"import": "./dist/index.js"
 		}
 	},
@@ -33,14 +35,13 @@
 		"generation"
 	],
 	"scripts": {
-		"update:packages": "npm update --save-dev && npm update --save",
 		"build": "tsup",
 		"dev": "npm run build -- --watch src",
-		"release": "npx git-ensure -a && npx bumpp --commit --tag --push && npm publish",
+		"release": "npx git-ensure -a && npm bumpp --commit --tag --push && npm publish",
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.17",
+		"@types/node": "^18.11.18",
 		"tsup": "^6.5.0",
 		"typescript": "^4.9.4"
 	},
@@ -49,10 +50,10 @@
 		"comment-json": "^4.2.3",
 		"consola": "^2.15.3",
 		"fast-glob": "^3.2.12",
-		"vite": "^4.0.3"
+		"vite": "^4.0.4"
 	},
+	"packageManager": "pnpm@7.22.0",
 	"engines": {
-		"node": ">=16.6.0",
-		"npm": ">=7.0.0"
+		"node": ">=16.6.0"
 	}
 }
