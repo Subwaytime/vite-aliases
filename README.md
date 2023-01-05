@@ -9,7 +9,7 @@
 </p>
 
 ## Vite 4
-Vite 4 support is experimental! [#48](https://github.com/Subwaytime/vite-aliases/issues/48) [v0.9.9](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.9.9)
+Vite 4 support is ensured with [v0.10.0](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.10.0)!
 
 ## Usage
 
@@ -198,7 +198,7 @@ due to this tiny library beeing inspired by both projects:
 
 [vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
 
-[vite-plugin-components](https://github.com/antfu/vite-plugin-components).
+[unplugin-vue-components](https://github.com/antfu/unplugin-vue-components).
 
 ## License
 
