@@ -79,7 +79,7 @@ export function isEmpty(value: any) {
  * Simple Info/Warn/Error Consola Instance
  */
 
-export const logger = consola.create({ defaults: { message: `[${MODULE_NAME}] -`} });
+export const logger = consola.create({ defaults: { message: `[${MODULE_NAME}] -` } });
 export function abort(message: any) {
 	throw logger.error(new Error(message));
 }
@@ -102,15 +102,53 @@ export async function readJSON(path: string) {
  * Writes a JSON File
  */
 
-export async function writeJSON(path: string, data: any, process: Process) {
+export const DEFAULT_INDENTATION: Indentation = 4; // default to 4 spaces before introducing the intepretation feature
+
+export async function writeJSON(path: string, data: any, process: Process, indentation: Indentation = DEFAULT_INDENTATION) {
 	const name = path.replace(/^.*[\\\/]/, '');
 	const state = process === 'add' || process === 'default' ? 'created' : 'updated';
 
 	try {
-		await fs.writeFile(path, stringify(data, null, 4));
+		await fs.writeFile(path, stringify(data, null, indentation));
 		logger.success(`File: ${name} successfully ${state}`);
 	} catch (error) {
 		logger.error(`File: ${name} could not be ${state}.`);
 		abort(error);
+	}
+}
+
+/**
+ * Interprets file indentations
+ */
+
+export type Indentation = number | '\t';
+
+export async function interpretFileIndentation(path: string): Promise<Indentation> {
+	const name = path.replace(/^.*[\\\/]/, '');
+
+	try {
+		const content = (await fs.readFile(path, 'utf-8')).toString();
+		const lines = content.split('\n');
+		const secondLine = lines[1];
+		let indentation: Indentation;
+
+		if (secondLine.startsWith('\t')) {
+			indentation = '\t';
+		} else {
+			const firstNonSpaceCharacter = split(secondLine, '').findIndex(char => char !== ' ');
+
+			if (firstNonSpaceCharacter === -1) {
+				throw new Error('Failed to interpret indentation from file. (No indentation found)');
+			}
+
+			indentation = firstNonSpaceCharacter;
+		}
+
+		logger.info(`File: Interpreted indentation as (${typeof indentation === 'number' ? `${indentation} spaces` : 'tabs'}) from file ${name} successfully`);
+
+		return indentation;
+	} catch (error) {
+		logger.error(`File: Failed to interpret indentation from ${name}.`);
+		return DEFAULT_INDENTATION;
 	}
 }
