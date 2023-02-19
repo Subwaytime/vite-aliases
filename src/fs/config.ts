@@ -1,9 +1,9 @@
-import { existsSync } from 'node:fs';
-import { abort, readJSON, writeJSON } from '../utils';
+import { abort, readJSON, interpretFileIndentation, writeJSON } from '../utils';
 
 import { IDEConfig } from '../constants';
 import type { Generator } from '../generator';
 import type { Process } from '../types';
+import type { Indentation } from '../utils';
 import { normalizePath } from 'vite';
 
 /**
@@ -21,14 +21,17 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 	const file = normalizePath(`${root}/${name}.json`);
 
 	try {
-		let json: any = await readJSON(file);
+		let [indentation, json]: [Indentation, any] = await Promise.all([
+			interpretFileIndentation(file),
+			readJSON(file),
+		]);
 
-		if(!json) {
+		if (!json) {
 			IDEConfig.compilerOptions.paths = { ...gen.paths };
 			json = Object.assign({}, IDEConfig);
 		}
 
-		if(!json.compilerOptions) {
+		if (!json.compilerOptions) {
 			json.compilerOptions = {
 				paths: { ...gen.paths },
 			};
@@ -36,7 +39,7 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 
 		let paths = json.compilerOptions.paths || {};
 
-		if(process === 'remove') {
+		if (process === 'remove') {
 			paths = Object.fromEntries(
 				Object.entries(paths).filter((p: any) => {
 					if (Object.values(gen.paths).flat().includes(p[1][0]) && p[1][0].includes(dir)) {
@@ -49,7 +52,7 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 		}
 
 		json.compilerOptions.paths = { ...paths, ...gen.paths };
-		await writeJSON(file, json, process);
+		await writeJSON(file, json, process, indentation);
 	} catch (error) {
 		abort(`Cannot write Config: ${file}.`);
 	}
