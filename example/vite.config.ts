@@ -1,14 +1,12 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vitest/config';
-import { ViteAliases } from '../dist/index';
+import { ViteAliases } from 'vite-aliases';
 
 
 export default defineConfig({
 	plugins: [
 		vue(),
 		ViteAliases({
-			useConfig: true,
-			useTypescript: true,
 			createLog: true,
 			logPath: './',
 			adjustDuplicates: true
