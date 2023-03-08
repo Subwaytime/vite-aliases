@@ -138,7 +138,7 @@ export async function interpretFileIndentation(path: string): Promise<Indentatio
 			const firstNonSpaceCharacter = split(secondLine, '').findIndex(char => char !== ' ');
 
 			if (firstNonSpaceCharacter === -1) {
-				throw new Error('Failed to interpret indentation from file. (No indentation found)');
+				logger.error('Failed to interpret indentation from file. (No indentation found)');
 			}
 
 			indentation = firstNonSpaceCharacter;

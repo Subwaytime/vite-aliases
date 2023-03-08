@@ -67,17 +67,17 @@ export interface Options {
 	/**
 	 * Generates paths in IDE config file
 	 * works with JS or TS
-	 * for Typescript: set `useTypescript` true
-	 * @default false
+	 * @default true
 	 */
 	useConfig: boolean;
 
 	/**
 	 * Will generate Paths in tsconfig
 	 * used in combination with `useConfig`
+	 * Typescript will be auto detected
 	 * @default false
 	 */
-	useTypescript: boolean;
+	dts: boolean;
 
 	/**
 	 * Root path of Vite project
@@ -95,4 +95,4 @@ export interface Path {
 	[key: string]: string[];
 }
 
-export type Process = 'add' | 'remove' | 'default';
+export type Process = 'add' | 'remove' | 'default' | 'normal';

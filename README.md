@@ -1,15 +1,12 @@
 <h2 align="left">vite-aliases</h2>
 
-<p align="left">Alias auto generation for Vite</p>
+<p align="left">Alias auto generation for Vite 4</p>
 
 <p align="left">
 <a href="https://www.npmjs.com/package/vite-aliases">
 <img src="https://img.shields.io/npm/v/vite-aliases?color=222&style=flat-square">
 </a>
 </p>
-
-## Vite 4
-Vite 4 support is ensured with [v0.10.0](https://github.com/Subwaytime/vite-aliases/releases/tag/v0.10.0)!
 
 ## Usage
 
@@ -174,15 +171,15 @@ ViteAliases({
 	/**
 	 * Generates paths in IDE config file
 	 * works with JS or TS
-	 * for Typescript: set `useTypescript` true
 	 */
-	useConfig: false,
+	useConfig: true,
 
 	/**
 	 * Will generate Paths in tsconfig
 	 * used in combination with `useConfig`
+	 * Typescript will be auto detected
 	 */
-	useTypescript: false,
+	dts: false,
 
 	/**
 	 * Root path of Vite project

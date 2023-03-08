@@ -15,7 +15,7 @@ import { abort, writeJSON } from '../utils';
  */
 
 export async function writeLog(gen: Generator, process: Process = 'normal') {
-	const { dir, createLog, logPath } = gen.options;
+	const { createLog, logPath } = gen.options;
 
 	if (!createLog) {
 		return;

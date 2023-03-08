@@ -1,3 +1,4 @@
+import { isPackageExists } from 'local-pkg';
 import type { Options } from './types';
 
 export const MODULE_NAME = 'vite-aliases';
@@ -15,10 +16,10 @@ export const config: Required<Options> = {
 	adjustDuplicates: false,
 
 	useAbsolute: false,
-	useConfig: false,
+	useConfig: true,
 	useIndexes: false,
-	useTypescript: false,
 
+	dts: false,
 	root: process.cwd(),
 };
 

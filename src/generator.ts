@@ -7,6 +7,7 @@ import chokidar from 'chokidar';
 import { resolve } from 'path';
 import { config } from "./constants";
 import { getDirectories } from './fs';
+import { resolveModule } from 'local-pkg';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -26,6 +27,8 @@ export class Generator {
 		this.options = Object.assign({}, config, options);
 
 		this.fullPath = normalizePath(resolve(this.options.root, this.options.dir)); // needed for absolute paths in watcher
+
+		this.detectTypescript();
 
 		// only watch on dev not on build
 		if (servermode === 'serve') {
@@ -119,6 +122,18 @@ export class Generator {
 
 			logger.warn(`Path: '${initialPath}' contains multiple folders with same name: ${duplicateFolders.toString()}.`);
 		}
+	}
+
+	/**
+	 *  Check if TypeScript is installed
+	 */
+
+	detectTypescript() {
+		this.options.dts = !this.options.dts
+			? !!resolveModule(`${this.options.root}/node_modules/typescript`)
+			: false;
+
+		logger.info(this.options.dts ? 'TypeScript got detected.' : 'TypeScript is not installed, fallback to JS only.');
 	}
 
 	/**

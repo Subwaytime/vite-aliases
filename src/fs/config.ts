@@ -11,13 +11,13 @@ import { normalizePath } from 'vite';
  */
 
 export async function writeConfig(gen: Generator, process: Process = 'default') {
-	const { root, dir, useTypescript, useConfig } = gen.options;
+	const { root, dir, dts, useConfig } = gen.options;
 
 	if (!useConfig) {
 		return;
 	}
 
-	const name = useTypescript ? 'tsconfig' : 'jsconfig';
+	const name = dts ? 'tsconfig' : 'jsconfig';
 	const file = normalizePath(`${root}/${name}.json`);
 
 	try {
