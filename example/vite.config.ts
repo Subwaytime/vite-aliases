@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vitest/config';
-import { ViteAliases } from 'vite-aliases';
+import { ViteAliases } from '../dist/index.js';
 
 
 export default defineConfig({
