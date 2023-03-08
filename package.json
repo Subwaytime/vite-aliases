@@ -2,9 +2,9 @@
 	"name": "vite-aliases",
 	"description": "Alias auto generation for Vite",
 	"version": "0.10.0",
+	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
-	"type": "module",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
@@ -41,18 +41,21 @@
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.18",
-		"tsup": "^6.5.0",
-		"typescript": "^4.9.4"
+		"@types/node": "^18.14.6",
+		"terser": "^5.16.5",
+		"tsup": "^6.6.3",
+		"typescript": "^4.9.5"
 	},
 	"dependencies": {
 		"chokidar": "^3.5.3",
 		"comment-json": "^4.2.3",
 		"consola": "^2.15.3",
 		"fast-glob": "^3.2.12",
-		"vite": "^4.0.4"
+		"local-pkg": "^0.4.3",
+		"vite": "^4.1.4",
+		"vite-aliases": "^0.10.0"
 	},
-	"packageManager": "pnpm@7.22.0",
+	"packageManager": "pnpm@7.27.1",
 	"engines": {
 		"node": ">=16.6.0"
 	}
