@@ -123,7 +123,7 @@ ViteAliases({
   /**
   * Prefix symbol for the aliases
   */
-  prefix: '@',
+  prefix: '~',
 
   /**
   * Allow searching for subdirectories
@@ -175,9 +175,8 @@ ViteAliases({
 
   /**
   * Override config paths
-  * @default false
   */
-  ovrConfig: boolean
+  ovrConfig: false,
 
   /**
   * Will generate Paths in tsconfig
