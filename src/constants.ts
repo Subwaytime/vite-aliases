@@ -6,7 +6,7 @@ export const MODULE_NAME = 'vite-aliases';
 export const config: Required<Options> = {
 	dir: 'src',
 
-	prefix: '@',
+	prefix: '~',
 	deep: true,
 	depth: 1,
 

@@ -10,7 +10,7 @@ export interface Options {
 
 	/**
 	 * Prefix symbol for the aliases
-	 * @default '@'
+	 * @default '~'
 	 */
 	prefix: string;
 
