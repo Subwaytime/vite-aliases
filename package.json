@@ -41,19 +41,19 @@
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
-		"@types/node": "^18.14.6",
-		"terser": "^5.16.5",
-		"tsup": "^6.6.3",
-		"typescript": "^4.9.5"
+		"@types/node": "^20.2.1",
+		"terser": "^5.17.4",
+		"tsup": "^6.7.0",
+		"typescript": "^5.0.4"
 	},
 	"dependencies": {
 		"chokidar": "^3.5.3",
 		"comment-json": "^4.2.3",
-		"consola": "^2.15.3",
+		"consola": "^3.1.0",
 		"fast-glob": "^3.2.12",
 		"local-pkg": "^0.4.3",
-		"vite": "^4.1.4",
-		"vite-aliases": "^0.10.0"
+		"vite": "^4.3.8",
+		"vite-aliases": "^0.11.0"
 	},
 	"packageManager": "pnpm@7.27.1",
 	"engines": {
