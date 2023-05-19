@@ -23,9 +23,9 @@ Add it to `vite.config.js`
 import { ViteAliases } from 'vite-aliases'
 
 export default {
-	plugins: [
-		ViteAliases()
-	]
+  plugins: [
+    ViteAliases()
+  ]
 };
 
 ```
@@ -33,7 +33,7 @@ export default {
 Add this to `package.json` (Plugin is only available for ESM)
 ```json
 {
-	"type": "module"
+  "type": "module"
 }
 ```
 
@@ -53,41 +53,41 @@ This structure:
 
 ```
 src
-    assets
-    components
-    pages
-    store
-    utils
+  assets
+  components
+  pages
+  store
+  utils
 ```
 
 will generate the following:
 
 ```ts
 [
-	{
-		find: '@',
-		replacement: '${your_project_path}/src'
-	},
-	{
-		find: '@assets',
-		replacement: '${your_project_path}/src/assets'
-	},
-	{
-		find: '@components',
-		replacement: '${your_project_path}/src/components'
-	},
-	{
-		find: '@pages',
-		replacement: '${your_project_path}/src/pages'
-	},
-	{
-		find: '@store',
-		replacement: '${your_project_path}/src/store'
-	},
-	{
-		find: '@utils',
-		replacement: '${your_project_path}/src/utils'
-	},
+  {
+    find: '@',
+    replacement: '${your_project_path}/src'
+  },
+  {
+    find: '@assets',
+    replacement: '${your_project_path}/src/assets'
+  },
+  {
+    find: '@components',
+    replacement: '${your_project_path}/src/components'
+  },
+  {
+    find: '@pages',
+    replacement: '${your_project_path}/src/pages'
+  },
+  {
+    find: '@store',
+    replacement: '${your_project_path}/src/store'
+  },
+  {
+    find: '@utils',
+    replacement: '${your_project_path}/src/utils'
+  },
 ]
 ```
 
@@ -115,76 +115,81 @@ Current available options:
 
 ```ts
 ViteAliases({
-	/**
-	 * Relative path to the project directory
-	 */
-	dir: 'src',
+  /**
+  * Relative path to the project directory
+  */
+  dir: 'src',
 
-	/**
-	 * Prefix symbol for the aliases
-	 */
-	prefix: '@',
+  /**
+  * Prefix symbol for the aliases
+  */
+  prefix: '@',
 
-	/**
-	 * Allow searching for subdirectories
-	 */
-	deep: true,
+  /**
+  * Allow searching for subdirectories
+  */
+  deep: true,
 
-	/**
-	 * Search depthlevel for subdirectories
-	 */
-	depth: 1,
+  /**
+  * Search depthlevel for subdirectories
+  */
+  depth: 1,
 
-	/**
-	 * Creates a Logfile
-	 * use `logPath` to change the location
-	 */
-	createLog: false,
+  /**
+  * Creates a Logfile
+  * use `logPath` to change the location
+  */
+  createLog: false,
 
-	/**
-	 * Path for Logfile
-	 */
+  /**
+  * Path for Logfile
+  */
+  logPath: 'src/logs',
 
-	logPath: 'src/logs',
+  /**
+  * Create global project directory alias
+  */
+  createGlobalAlias: true,
 
-	/**
-	 * Create global project directory alias
-	 */
-	createGlobalAlias: true,
+  /**
+  * Turns duplicates into camelCased path aliases
+  */
+  adjustDuplicates: false,
 
-	/**
-	 * Turns duplicates into camelCased path aliases
-	 */
-	adjustDuplicates: false,
+  /**
+  * Used paths in JS/TS configs will now be relative to baseUrl
+  */
+  useAbsolute: false,
 
-	/**
-	 * Used paths in JS/TS configs will now be relative to baseUrl
-	 */
-	useAbsolute: false,
+  /**
+  * Adds seperate index paths
+  * approach created by @davidohlin
+  */
+  useIndexes: false,
 
-	/**
-	 * Adds seperate index paths
-	 * approach created by @davidohlin
-	 */
-	useIndexes: false,
+  /**
+  * Generates paths in IDE config file
+  * works with JS or TS
+  */
+  useConfig: true,
 
-	/**
-	 * Generates paths in IDE config file
-	 * works with JS or TS
-	 */
-	useConfig: true,
+  /**
+  * Override config paths
+  * @default false
+  */
+  ovrConfig: boolean
 
-	/**
-	 * Will generate Paths in tsconfig
-	 * used in combination with `useConfig`
-	 * Typescript will be auto detected
-	 */
-	dts: false,
+  /**
+  * Will generate Paths in tsconfig
+  * used in combination with `useConfig`
+  * Typescript will be auto detected
+  */
+  dts: false,
 
-	/**
-	 * Root path of Vite project
-	 */
-	root: process.cwd()
+  /**
+  * Root path of Vite project
+  */
+  root: process.cwd()
 });
 ```
 
