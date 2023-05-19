@@ -17,6 +17,7 @@ export const config: Required<Options> = {
 
 	useAbsolute: false,
 	useConfig: true,
+	ovrConfig: false,
 	useIndexes: false,
 
 	dts: false,

@@ -5,13 +5,14 @@ import type { Generator } from '../generator';
 import type { Process } from '../types';
 import type { Indentation } from '../utils';
 import { normalizePath } from 'vite';
+import { isEmpty } from '../utils';
 
 /**
  * Creates a JS or TS Configfile
  */
 
 export async function writeConfig(gen: Generator, process: Process = 'default') {
-	const { root, dir, dts, useConfig } = gen.options;
+	const { root, dir, dts, useConfig, ovrConfig } = gen.options;
 
 	if (!useConfig) {
 		return;
@@ -26,15 +27,8 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 			readJSON(file),
 		]);
 
-		if (!json) {
-			IDEConfig.compilerOptions.paths = { ...gen.paths };
+		if (isEmpty(json) || isEmpty(json.compilerOptions)) {
 			json = Object.assign({}, IDEConfig);
-		}
-
-		if (!json.compilerOptions) {
-			json.compilerOptions = {
-				paths: { ...gen.paths },
-			};
 		}
 
 		let paths = json.compilerOptions.paths || {};
@@ -51,7 +45,7 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 			);
 		}
 
-		json.compilerOptions.paths = { ...paths, ...gen.paths };
+		json.compilerOptions.paths = ovrConfig ? gen.paths : { ...paths, ...gen.paths };
 		await writeJSON(file, json, process, indentation);
 	} catch (error) {
 		abort(`Cannot write Config: ${file}.`);

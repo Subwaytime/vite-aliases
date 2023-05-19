@@ -72,6 +72,12 @@ export interface Options {
 	useConfig: boolean;
 
 	/**
+	 * Override config paths
+	 * @default false
+	 */
+	ovrConfig: boolean
+
+	/**
 	 * Will generate Paths in tsconfig
 	 * used in combination with `useConfig`
 	 * Typescript will be auto detected
