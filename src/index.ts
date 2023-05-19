@@ -1,9 +1,9 @@
-import type { PluginOption } from 'vite';
+import type { Plugin } from 'vite';
 import { Generator } from './generator';
 import type { Options } from './types';
 import { toArray } from './utils';
 
-export function ViteAliases(options: Partial<Options> = {}): PluginOption {
+export function ViteAliases(options: Partial<Options> = {}): Plugin {
 	let gen: Generator;
 
 	return {
