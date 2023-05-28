@@ -4,3 +4,5 @@ dist
 .prettierignore
 .vscode
 package-lock.json
+example/jsconfig.json
+exmaple/tsconfig.json

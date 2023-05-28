@@ -86,6 +86,12 @@ export interface Options {
 	dts: boolean;
 
 	/**
+	 * Disables any terminal output
+	 * @default true
+	 */
+	silent: boolean;
+
+	/**
 	 * Root path of Vite project
 	 * @default 'process.cwd()'
 	 */

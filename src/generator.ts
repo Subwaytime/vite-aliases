@@ -26,6 +26,8 @@ export class Generator {
 	constructor(public readonly servermode: string, options?: Partial<Options>) {
 		this.options = Object.assign({}, config, options);
 
+		logger.level = this.options.silent ? -999 : 3;
+
 		this.fullPath = normalizePath(resolve(this.options.root, this.options.dir)); // needed for absolute paths in watcher
 
 		this.detectTypescript();

@@ -21,6 +21,7 @@ export const config: Required<Options> = {
 	useIndexes: false,
 
 	dts: false,
+	silent: true,
 	root: process.cwd(),
 };
 

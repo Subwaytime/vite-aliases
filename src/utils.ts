@@ -1,4 +1,4 @@
-import consola from 'consola';
+import { createConsola } from 'consola';
 import fs from 'node:fs/promises';
 import { normalizePath } from 'vite';
 import { MODULE_NAME } from './constants';
@@ -79,7 +79,7 @@ export function isEmpty(value: any) {
  * Simple Info/Warn/Error Consola Instance
  */
 
-export const logger = consola.create({ defaults: { message: `[${MODULE_NAME}] -` } });
+export const logger = createConsola({ defaults: { message: `[${MODULE_NAME}] -` } });
 export function abort(message: any) {
 	throw logger.error(new Error(message));
 }

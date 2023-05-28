@@ -186,6 +186,11 @@ ViteAliases({
   dts: false,
 
   /**
+  * Disables any terminal output
+  */
+  silent: true,
+
+  /**
   * Root path of Vite project
   */
   root: process.cwd()

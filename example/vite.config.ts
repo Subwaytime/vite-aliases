@@ -9,7 +9,7 @@ export default defineConfig({
 		ViteAliases({
 			createLog: true,
 			logPath: './',
-			adjustDuplicates: true
+			adjustDuplicates: true,
 		}),
 	],
 	server: {
