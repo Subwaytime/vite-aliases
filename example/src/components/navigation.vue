@@ -4,9 +4,3 @@
 		<code> @components/navigation.vue </code>
 	</p>
 </template>
-
-<script>
-export default {
-	name: 'navigation'
-};
-</script>

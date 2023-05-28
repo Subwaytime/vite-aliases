@@ -1,9 +1,5 @@
 [
     {
-        "find": "~assets",
-        "replacement": "/home/subway/work/vite-aliases/example/src/assets"
-    },
-    {
         "find": "~components",
         "replacement": "/home/subway/work/vite-aliases/example/src/components"
     },

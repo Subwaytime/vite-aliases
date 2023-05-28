@@ -23,5 +23,8 @@
 		"vite": "^4.3.9",
 		"vitest": "^0.31.1",
 		"vue": "^3.3.4"
+	},
+	"devDependencies": {
+		"typescript": "^5.0.4"
 	}
 }

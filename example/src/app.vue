@@ -18,28 +18,13 @@
 </template>
 
 
-<script>
-
+<script setup lang="ts">
 import { ref } from 'vue';
+import home from '~pages/home.vue';
+import navigation from '~components/navigation.vue';
+import { random } from '~utils/random';
 
-import home from '@pages/home.vue';
-import navigation from '@components/navigation.vue';
-import { random } from '@utils/random';
-
-export default {
-	name: 'app',
-	components: {
-		home,
-		navigation
-	},
-	setup() {
-		const color = ref(random());
-
-		return {
-			color
-		}
-	}
-};
+const color = ref(random());
 </script>
 
 <style lang="css">
