@@ -3,12 +3,11 @@
 		<h1> Vite Aliases Example </h1>
 		<home />
 		<navigation />
-		<test />
 		<div class="box">
 			<p>
 				Randomized Hexcode
 				<br />
-				<code> loaded from @utils/random.js </code>
+				<code> loaded from ~utils/random.js </code>
 			</p>
 			<div class="colored" :style="`background-color: ${color};`">
 				{{ color }}
