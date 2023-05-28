@@ -20,7 +20,7 @@
 	"dependencies": {
 		"@vitejs/plugin-vue": "^4.2.3",
 		"@vue/compiler-sfc": "^3.3.4",
-		"vite": "^4.3.8",
+		"vite": "^4.3.9",
 		"vitest": "^0.31.1",
 		"vue": "^3.3.4"
 	}
