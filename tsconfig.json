@@ -1,20 +1,30 @@
 {
-    "compilerOptions": {
-        "module": "ESNext",
-        "target": "ESNext",
-        "lib": [
-            "ESNext"
-        ],
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": false,
-        "strict": true,
-        "strictNullChecks": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true
-    },
-    "exclude": [
-        "**/dist",
-        "**/node_modules",
-        "**/test"
-    ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"lib": [
+			"ESNext"
+		],
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "bundler",
+		"moduleDetection": "force",
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"composite": true,
+		"strict": true,
+		"downlevelIteration": true,
+		"skipLibCheck": true,
+		"jsx": "preserve",
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowJs": true,
+		"types": [
+			"bun-types" // add Bun global
+		]
+	},
+	"exclude": [
+		"**/dist",
+		"**/node_modules",
+		"**/test"
+	]
 }

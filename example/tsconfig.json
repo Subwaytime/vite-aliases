@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "~components/*": [
-                "src/components/*"
-            ],
-            "~logs/*": [
-                "src/logs/*"
-            ],
-            "~pages/*": [
-                "src/pages/*"
-            ],
-            "~utils/*": [
-                "src/utils/*"
-            ],
-            "~/*": [
-                "src/*"
-            ]
-        }
-    }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"~components/*": [
+				"src/components/*"
+			],
+			"~logs/*": [
+				"src/logs/*"
+			],
+			"~pages/*": [
+				"src/pages/*"
+			],
+			"~utils/*": [
+				"src/utils/*"
+			],
+			"~/*": [
+				"src/*"
+			]
+		}
+	}
 }

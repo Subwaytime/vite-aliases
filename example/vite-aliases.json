@@ -1,22 +1,22 @@
 [
-    {
-        "find": "~components",
-        "replacement": "/home/subway/work/vite-aliases/example/src/components"
-    },
-    {
-        "find": "~logs",
-        "replacement": "/home/subway/work/vite-aliases/example/src/logs"
-    },
-    {
-        "find": "~pages",
-        "replacement": "/home/subway/work/vite-aliases/example/src/pages"
-    },
-    {
-        "find": "~utils",
-        "replacement": "/home/subway/work/vite-aliases/example/src/utils"
-    },
-    {
-        "find": "~",
-        "replacement": "/home/subway/work/vite-aliases/example/src"
-    }
+	{
+		"find": "~components",
+		"replacement": "/home/subway/work/vite-aliases/example/src/components"
+	},
+	{
+		"find": "~logs",
+		"replacement": "/home/subway/work/vite-aliases/example/src/logs"
+	},
+	{
+		"find": "~pages",
+		"replacement": "/home/subway/work/vite-aliases/example/src/pages"
+	},
+	{
+		"find": "~utils",
+		"replacement": "/home/subway/work/vite-aliases/example/src/utils"
+	},
+	{
+		"find": "~",
+		"replacement": "/home/subway/work/vite-aliases/example/src"
+	}
 ]

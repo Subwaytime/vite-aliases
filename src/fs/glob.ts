@@ -15,7 +15,7 @@ export async function getDirectories(gen: Generator) {
 		onlyDirectories: true,
 		cwd: root,
 		deep: depth,
-		absolute: true,
+		absolute: true
 	});
 
 	if (!directories.length) {

@@ -1,13 +1,10 @@
 import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
-import { normalizePath } from 'vite';
 
 import { MODULE_NAME } from '../constants';
 import type { Generator } from '../generator';
 import type { Process } from '../types';
-import { abort, writeJSON } from '../utils';
-
-
+import { abort, normalizePath, writeJSON } from '../utils';
 
 /**
  * Creates a Logfile

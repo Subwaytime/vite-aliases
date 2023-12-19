@@ -14,8 +14,8 @@ export function ViteAliases(options: Partial<Options> = {}): Plugin {
 			gen.init();
 
 			config.resolve = {
-				alias: config.resolve?.alias ? [...toArray(config.resolve.alias as any), ...gen.aliases] : gen.aliases,
+				alias: config.resolve?.alias ? [...toArray(config.resolve.alias as any), ...gen.aliases] : gen.aliases
 			};
-		},
+		}
 	};
-};
+}

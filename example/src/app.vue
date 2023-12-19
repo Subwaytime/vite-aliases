@@ -6,7 +6,7 @@
 		<div class="box">
 			<p>
 				Randomized Hexcode
-				<br />
+				<br>
 				<code> loaded from ~utils/random.js </code>
 			</p>
 			<div class="colored" :style="`background-color: ${color};`">
@@ -15,7 +15,6 @@
 		</div>
 	</div>
 </template>
-
 
 <script setup lang="ts">
 import { ref } from 'vue';

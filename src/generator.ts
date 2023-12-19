@@ -1,16 +1,14 @@
-import type { Alias, Options, Path } from './types';
-import { normalizePath } from 'vite';
-import { logger, split, toArray, toCamelCase, toRelative } from './utils';
-import { writeLog, writeConfig } from './fs';
-
-import chokidar from 'chokidar';
 import { resolve } from 'path';
-import { config } from "./constants";
-import { getDirectories } from './fs';
 import { resolveModule } from 'local-pkg';
+import type { Alias, Options, Path } from './types';
+import { logger, normalizePath, split, toArray, toCamelCase, toRelative } from './utils';
+import { getDirectories, writeConfig, writeLog } from './fs';
+
+// import chokidar from 'chokidar';
+import { config } from './constants';
 
 /**
- * Reads the Projectpath and returns Vite Aliases
+ * Reads the Project path and returns Aliases in Vite format
  * @param options
  * @returns Record<string, string>
  */
@@ -34,7 +32,7 @@ export class Generator {
 
 		// only watch on dev not on build
 		if (servermode === 'serve') {
-			this.observe();
+			// this.observe();
 		}
 	}
 
@@ -53,18 +51,18 @@ export class Generator {
 			const uniqueFolders = [...new Set(folders)] as string[];
 			this.checkForDuplicates(correctedPath, folders, uniqueFolders);
 
-			if(this.aliases.some((a) => a.find === key)) {
+			if (this.aliases.some(a => a.find === key)) {
 				logger.warn(
-					'There are duplicate Aliases generated, either fix the folderstructure or enable adjustDuplicates.',
+					'There are duplicate Aliases generated, either fix the folderstructure or enable adjustDuplicates.'
 				);
 
 				if (this.options.adjustDuplicates && this.options.depth > 1) {
-					const name = folders.filter((f) => !split(normalizePath(this.options.dir), '/').includes(f)).join('-');
+					const name = folders.filter(f => !split(normalizePath(this.options.dir), '/').includes(f)).join('-');
 					key = `${this.options.prefix}${toCamelCase(name)}`;
 				}
 			}
 
-			if(lastDir === this.options.dir && this.options.createGlobalAlias) {
+			if (lastDir === this.options.dir && this.options.createGlobalAlias) {
 				key = `${this.options.prefix}`;
 			}
 
@@ -76,7 +74,7 @@ export class Generator {
 
 			const configPath = this.options.useAbsolute ? correctedPath : toRelative(correctedPath, this.options.dir);
 
-			if(this.options.useIndexes) {
+			if (this.options.useIndexes) {
 				this.paths[key] = [configPath];
 			} else {
 				this.paths[`${key}/*`] = [`${configPath}/*`];
@@ -93,16 +91,16 @@ export class Generator {
 		toArray(path).forEach((p) => {
 			const correctedPath = normalizePath(p);
 
-			if(this.directories.has(correctedPath)) {
+			if (this.directories.has(correctedPath)) {
 				this.directories.delete(correctedPath);
-				this.aliases = this.aliases.filter((a) => a.replacement != correctedPath);
+				this.aliases = this.aliases.filter(a => a.replacement !== correctedPath);
 				this.paths = Object.fromEntries(
 					Object.entries(this.paths).filter(
-						(configPath) => configPath[1][0].slice(0, -2) != (
+						configPath => configPath[1][0].slice(0, -2) !== (
 							this.options.useIndexes ? correctedPath : `${correctedPath}/*`
 						)
 					)
-				)
+				);
 			}
 		});
 	}
@@ -144,7 +142,7 @@ export class Generator {
 	 * writes IDE Config
 	 */
 
-	private searched: boolean = false;
+	private searched = false;
 
 	async init() {
 		if (this.searched) {
@@ -172,20 +170,20 @@ export class Generator {
 	 */
 
 	observe() {
-		const watcher = chokidar.watch(this.fullPath, { ignoreInitial: true, depth: this.options.depth });
+		// const watcher = watch(this.fullPath, { ignoreInitial: true, depth: this.options.depth });
 
-		watcher
-			.on('addDir', (path) => {
-				this.addAlias(path);
-				writeLog(this, 'add');
-				writeConfig(this, 'add');
-				logger.info(`Watcher added new Path: ${path}`);
-			})
-			.on('unlinkDir', (path) => {
-				this.removeAlias(path);
-				writeLog(this, 'remove');
-				writeConfig(this, 'remove');
-				logger.info(`Watcher removed Path: ${path}`);
-			});
+		// watcher
+		// 	.on('addDir', (path) => {
+		// 		this.addAlias(path);
+		// 		writeLog(this, 'add');
+		// 		writeConfig(this, 'add');
+		// 		logger.info(`Watcher added new Path: ${path}`);
+		// 	})
+		// 	.on('unlinkDir', (path) => {
+		// 		this.removeAlias(path);
+		// 		writeLog(this, 'remove');
+		// 		writeConfig(this, 'remove');
+		// 		logger.info(`Watcher removed Path: ${path}`);
+		// 	});
 	}
 }

@@ -1,9 +1,8 @@
-import { createConsola } from 'consola';
 import fs from 'node:fs/promises';
-import { normalizePath } from 'vite';
-import { MODULE_NAME } from './constants';
-import type { Process } from './types';
+import os from 'node:os';
+import path from 'node:path';
 import { parse, stringify } from 'comment-json';
+import type { Process } from './types';
 
 /**
  * Split String on Seperator into Array
@@ -38,8 +37,8 @@ export function toArray<T>(value: T | T[]): T[] {
 export function toRelative(path: string, dir: string): string {
 	let folders = split(normalizePath(path), '/');
 	folders = folders.slice(
-		folders.findIndex((f) => f === dir),
-		folders.length,
+		folders.findIndex(f => f === dir),
+		folders.length
 	);
 	return normalizePath(`./${folders.join('/')}`);
 }
@@ -79,7 +78,8 @@ export function isEmpty(value: any) {
  * Simple Info/Warn/Error Consola Instance
  */
 
-export const logger = createConsola({ defaults: { message: `[${MODULE_NAME}] -` } });
+// export const logger = createConsola({ defaults: { message: `[${MODULE_NAME}] -` } });
+export const logger = console;
 export function abort(message: any) {
 	throw logger.error(new Error(message));
 }
@@ -91,7 +91,7 @@ export function abort(message: any) {
 export async function readJSON(path: string) {
 	try {
 		const file = (await fs.readFile(path, 'utf-8')).toString();
-		logger.success(`Config: ${path} successfully read!`);
+		logger.info(`Config: ${path} successfully read!`);
 		return parse(file);
 	} catch (error) {
 		logger.error(`File: ${path} was not found!`);
@@ -106,11 +106,11 @@ export const DEFAULT_INDENTATION: Indentation = 4; // default to 4 spaces before
 
 export async function writeJSON(path: string, data: any, process: Process, indentation: Indentation = DEFAULT_INDENTATION) {
 	const name = path.replace(/^.*[\\\/]/, '');
-	const state = process === 'add' || process === 'default' ? 'created' : 'updated';
+	const state = process === 'add' || (process === 'default' ? 'created' : 'updated');
 
 	try {
 		await fs.writeFile(path, stringify(data, null, indentation));
-		logger.success(`File: ${name} successfully ${state}`);
+		logger.info(`File: ${name} successfully ${state}`);
 	} catch (error) {
 		logger.error(`File: ${name} could not be ${state}.`);
 		abort(error);
@@ -151,4 +151,12 @@ export async function interpretFileIndentation(path: string): Promise<Indentatio
 		logger.error(`File: Failed to interpret indentation from ${name}.`);
 		return DEFAULT_INDENTATION;
 	}
+}
+
+/**
+ * Normalize file path slashes
+ */
+export function normalizePath(id: string): string {
+	const isWindows = os.platform() === 'win32';
+	return path.posix.normalize(isWindows ? id.replace(/\\/g, '/') : id);
 }

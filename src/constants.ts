@@ -1,4 +1,3 @@
-import { isPackageExists } from 'local-pkg';
 import type { Options } from './types';
 
 export const MODULE_NAME = 'vite-aliases';
@@ -22,12 +21,12 @@ export const config: Required<Options> = {
 
 	dts: false,
 	silent: true,
-	root: process.cwd(),
+	root: process.cwd()
 };
 
 export const IDEConfig = {
 	compilerOptions: {
 		baseUrl: '.',
-		paths: {},
-	},
+		paths: {}
+	}
 };

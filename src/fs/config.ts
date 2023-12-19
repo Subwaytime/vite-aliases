@@ -1,11 +1,8 @@
-import { abort, readJSON, interpretFileIndentation, writeJSON } from '../utils';
+import { type Indentation, abort, interpretFileIndentation, isEmpty, normalizePath, readJSON, writeJSON } from '../utils';
 
 import { IDEConfig } from '../constants';
 import type { Generator } from '../generator';
 import type { Process } from '../types';
-import type { Indentation } from '../utils';
-import { normalizePath } from 'vite';
-import { isEmpty } from '../utils';
 
 /**
  * Creates a JS or TS Configfile
@@ -24,7 +21,7 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 	try {
 		let [indentation, json]: [Indentation, any] = await Promise.all([
 			interpretFileIndentation(file),
-			readJSON(file),
+			readJSON(file)
 		]);
 
 		if (isEmpty(json) || isEmpty(json.compilerOptions)) {
@@ -41,7 +38,7 @@ export async function writeConfig(gen: Generator, process: Process = 'default') 
 					} else if (!p[1][0].includes(dir)) {
 						return p;
 					}
-				}),
+				})
 			);
 		}
 
