@@ -50,7 +50,6 @@
     "chokidar": "^3.5.3",
     "comment-json": "^4.2.3",
     "consola": "^3.2.3",
-    "fast-glob": "^3.3.2",
     "local-pkg": "^0.5.0"
   },
   "devDependencies": {
