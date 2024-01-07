@@ -2,24 +2,26 @@ import type { Options } from './types';
 
 export const MODULE_NAME = 'vite-aliases';
 
-export const config: Required<Options> = {
+export const defaultOptions: Required<Options> = {
 	dir: 'src',
 
 	prefix: '~',
-	deep: true,
 	depth: 1,
 
-	createGlobalAlias: true,
-	createLog: false,
-	logPath: 'src/logs',
 	adjustDuplicates: false,
-
 	useAbsolute: false,
-	useConfig: true,
-	ovrConfig: false,
 	useIndexes: false,
 
-	dts: false,
+	includeGlobalAlias: true,
+	log: `./${MODULE_NAME}.log.json`,
+
+	config: {
+		use: true,
+		load: false,
+		override: false
+	},
+
+	dts: false, // automatically detected
 	silent: true,
 	root: process.cwd()
 };
