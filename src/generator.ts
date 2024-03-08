@@ -7,7 +7,7 @@ import chokidar from 'chokidar';
 import { resolve } from 'path';
 import { config } from "./constants";
 import { getDirectories } from './fs';
-import { resolveModule } from 'local-pkg';
+import { isPackageExists } from 'local-pkg';
 
 /**
  * Reads the Projectpath and returns Vite Aliases
@@ -131,10 +131,7 @@ export class Generator {
 	 */
 
 	detectTypescript() {
-		this.options.dts = !this.options.dts
-			? !!resolveModule(`${this.options.root}/node_modules/typescript`)
-			: false;
-
+		this.options.dts = this.options.dts || isPackageExists(`${this.options.root}/node_modules/typescript`) || isPackageExists('typescript');
 		logger.info(this.options.dts ? 'TypeScript got detected.' : 'TypeScript is not installed, fallback to JS only.');
 	}
 
