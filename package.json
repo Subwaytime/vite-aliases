@@ -22,7 +22,7 @@
   "author": "Subwaytime <leon.l@nophase.de>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/subwaytime/vite-aliases"
+    "url": "git+https://github.com/subwaytime/vite-aliases.git"
   },
   "homepage": "https://github.com/subwaytime/vite-aliases#readme",
   "bugs": "https://github.com/subwaytime/vite-aliases/issues",
@@ -47,19 +47,19 @@
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
-    "chokidar": "^3.5.3",
+    "chokidar": "^3.6.0",
     "comment-json": "^4.2.3",
     "consola": "^3.2.3",
     "local-pkg": "^0.5.0"
   },
   "devDependencies": {
     "@subwaytime/eslint-config": "^0.0.11",
-    "@types/node": "^20.10.4",
-    "bun-plugin-dts": "^0.2.1",
-    "bun-types": "^1.0.17",
-    "eslint": "^8.56.0",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "@types/node": "^20.12.12",
+    "bun-plugin-dts": "^0.2.3",
+    "bun-types": "^1.1.10",
+    "eslint": "^9.3.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12"
   }
 }
