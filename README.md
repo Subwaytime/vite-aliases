@@ -1,6 +1,6 @@
 <h2 align="left">vite-aliases</h2>
 
-<p align="left">Alias auto generation for Vite 5</p>
+<p align="left">Alias auto generation for Vite 6</p>
 
 <p align="left">
 <a href="https://www.npmjs.com/package/vite-aliases">
