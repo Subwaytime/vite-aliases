@@ -65,27 +65,27 @@ will generate the following:
 ```ts
 [
   {
-    find: '@',
+    find: '~',
     replacement: '${your_project_path}/src'
   },
   {
-    find: '@assets',
+    find: '~assets',
     replacement: '${your_project_path}/src/assets'
   },
   {
-    find: '@components',
+    find: '~components',
     replacement: '${your_project_path}/src/components'
   },
   {
-    find: '@pages',
+    find: '~pages',
     replacement: '${your_project_path}/src/pages'
   },
   {
-    find: '@store',
+    find: '~store',
     replacement: '${your_project_path}/src/store'
   },
   {
-    find: '@utils',
+    find: '~utils',
     replacement: '${your_project_path}/src/utils'
   },
 ]
@@ -103,9 +103,9 @@ This will turn the entire Filepath of said duplicate into the alias itself, like
 
 Example:
 ```
-`src/components` -> `@components`
-`src/pages/components` -> `@pagesComponents`
-`src/test/new/partials/components` -> `@testNewPartialsComponents`
+`src/components` -> `~components`
+`src/pages/components` -> `~pagesComponents`
+`src/test/new/partials/components` -> `~testNewPartialsComponents`
 ```
 and so on..
 
